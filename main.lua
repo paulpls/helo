@@ -15,15 +15,17 @@
 
 
 --
---  Globals, imports, etc
+--  Variables, imports, etc
 --
-
+local Helicopter = require "helicopter"
+local helo = Helicopter:new()
 
 
 --
 --  Load callbacks
 --
 love.load = function ()
+    helo:load()
 end
 
 
@@ -32,6 +34,7 @@ end
 --  Update callbacks
 --
 love.update = function (dt)
+    helo:update(dt)
 end
 
 
@@ -40,9 +43,7 @@ end
 --  Draw callbacks
 --
 love.draw = function ()
-    local msg = "Hello, world!"
-    local x,y = 0,0
-    love.graphics.print(msg, x, y)
+    helo:draw()
 end
 
 
