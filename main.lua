@@ -1,12 +1,12 @@
 ---
----      o        o      oisoisoiso    o              soisoi 
+---      s        s      soisoisois    s              isoiso
 ---     soi      soi    soisoisois    soi           oisoisoiso
----     soi      soi    soi           soi          soi      soi
----     soisoisoisoi    soisoisoi     soi          soi      soi
+---     ois      ois    ois           ois          ois      ois
+---     isoisoisoiso    isoisoiso     iso          iso      iso
 ---     soisoisoisoi    soisoiso      soi          soi      soi
----     soi      soi    soi           soi          soi      soi
----     soi      soi    soisoisois    soisoisois    oisoisoiso
----      o        o      oisoisoiso    oisoisoiso     soisoi 
+---     ois      ois    ois           ois          ois      ois
+---     iso      iso    isoisoisoi    isoisoisoi    soisoisois
+---      o        o      oisoisoiso    oisoisoiso     soisoi
 ---
 --- Helo: Helicopter game for LOVE
 --- Author: paulpls
