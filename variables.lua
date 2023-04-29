@@ -35,8 +35,9 @@ spriteAnimationDelay = 0.1
 --
 helicopterX = math.floor(windowWidth / 3) - math.floor(spriteWidth / 2)
 helicopterY = math.floor(windowHeight / 2) - math.floor(spriteHeight / 2)
-helicopterSpeed = 3.0
-helicopterStatus = {}
+helicopterLiftSpeed = 2.0
+helicopterDropSpeed = 2.5
+helicopterDropDelay = 1.0
 helicopterBounds = {
                         x1 = 0,
                         y1 = 0,
@@ -44,6 +45,7 @@ helicopterBounds = {
                         y2 = windowHeight - spriteHeight
                                                           }
 helicopterImgPath = "assets/img/helo.png"
+helicopterFallDelay = 0.1
 
 
 

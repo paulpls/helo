@@ -44,7 +44,9 @@ love.load = function ()
     --  Player (Helicopter)
     player = Helicopter:new( helicopterX,
                              helicopterY,
-                             helicopterSpeed,
+                             helicopterLiftSpeed,
+                             helicopterDropSpeed,
+                             helicopterDropDelay,
                              helicopterStatus,
                              helicopterBounds,
                              helicopterImgPath  )
@@ -60,11 +62,27 @@ end
 love.update = function (dt)
 
     --  Player (Helicopter)
+    local dy = 1
     if love.keyboard.isDown("space") then
-        player:move(0,1)
+        dy = 1
+        player.fallElapsedTime = 0
+        player.falling = false
     else
-        player:move()
+        if not(player.falling) then
+            -- Evaluate delay
+            if player.fallElapsedTime <= player.fallDelay then
+                player.fallElapsedTime = player.fallElapsedTime + dt
+                dy = 0
+            else
+                player.falling = true
+                player.fallElapsedTime = 0
+                dy = -1
+            end
+        else
+            dy = -1
+        end
     end
+    player:move(0, dy)
     player:update(dt)
 
 end

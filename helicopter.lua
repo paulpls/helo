@@ -9,11 +9,12 @@ Helicopter = class:new()
 --
 --  init
 --
-function Helicopter:init (x, y, speed, status, bounds, imgPath)
+function Helicopter:init (x, y, liftSpeed, dropSpeed, dropDelay, bounds, imgPath)
     self.x = x or 0
     self.y = y or 0
-    self.speed = speed or helicopterSpeed
-    self.status = status or {}
+    self.liftSpeed = liftSpeed or helicopterLiftSpeed
+    self.dropSpeed = dropSpeed or helicopterDropSpeed
+    self.dropDelay = dropDelay or helicopterDropDelay
     --  Boundaries
     self.bounds = bounds or helicopterBounds
     --  Image attributes
@@ -36,6 +37,10 @@ function Helicopter:init (x, y, speed, status, bounds, imgPath)
                                             self.frames.w * self.frames.total,
                                             self.frames.h                        )
     end
+    self.fallDelay = helicopterFallDelay
+    self.fallElapsedTime = 0
+    --  Statuses
+    self.falling = false
 end
 
 
@@ -104,11 +109,20 @@ end
 --
 --  Move the helicopter
 --
-function Helicopter:move (dx,dy)
+function Helicopter:move (dx, dy)
     dx = dx or 0
     dy = dy or -1
-    self:setX(self.x - (dx * self.speed))
-    self:setY(self.y - (dy * self.speed))
+    if dy > 0 then
+        dy = dy * self.liftSpeed
+    elseif dy < 0 then
+        if self.falling then
+            dy = dy * self.dropSpeed
+        else
+            dy = 0
+        end
+    end
+    self:setX(self.x - dx)
+    self:setY(self.y - dy)
 end
 
 
