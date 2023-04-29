@@ -20,6 +20,7 @@
 require "class"
 require "variables"
 
+require "quad"
 require "helicopter"
 require "camera"
 

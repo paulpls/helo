@@ -10,12 +10,12 @@ Camera = class:new()
 --  Camera init
 --
 function Camera:init (x, y, sX, sY, r, bounds)
-    Camera.x = x or cameraX
-    Camera.y = x or cameraY
-    Camera.scaleX = sX or cameraScaleX
-    Camera.scaleY = sY or cameraScaleY
-    Camera.rotation = r or cameraRotation
-    Camera.bounds = bounds or cameraBounds
+    self.x = x or cameraX
+    self.y = x or cameraY
+    self.scaleX = sX or cameraScaleX
+    self.scaleY = sY or cameraScaleY
+    self.rotation = r or cameraRotation
+    self.bounds = bounds or cameraBounds
 end
 
 

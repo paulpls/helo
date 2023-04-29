@@ -10,24 +10,32 @@ Helicopter = class:new()
 --  init
 --
 function Helicopter:init (x, y, speed, status, bounds, imgPath)
-    Helicopter.x = x or 0
-    Helicopter.y = y or 0
-    Helicopter.speed = speed or helicopterSpeed
-    Helicopter.status = status or {}
+    self.x = x or 0
+    self.y = y or 0
+    self.speed = speed or helicopterSpeed
+    self.status = status or {}
     --  Boundaries
-    Helicopter.bounds = bounds or helicopterBounds
+    self.bounds = bounds or helicopterBounds
     --  Image attributes
-    Helicopter.image = nil
-    Helicopter.imgPath = helicopterImgPath or imgPath
+    self.imgPath = helicopterImgPath or imgPath
+    self.image = love.graphics.newImage(self.imgPath)
     --  Animation-related things
-    Helicopter.frames = {}
-    Helicopter.frames.total = spriteFrames
-    Helicopter.frames.list = {}
-    Helicopter.frames.w = spriteWidth
-    Helicopter.frames.h = spriteHeight
-    Helicopter.frames.current = 1
-    Helicopter.delay = spriteAnimationDelay
-    Helicopter.elapsedTime = 0
+    self.frames = {}
+    self.frames.total = spriteFrames
+    self.frames.list = {}
+    self.frames.w = spriteWidth
+    self.frames.h = spriteHeight
+    self.frames.current = 1
+    self.delay = spriteAnimationDelay
+    self.elapsedTime = 0
+    --  Build the frames list
+    for f=1,self.frames.total do
+        self.frames.list[f] = QuadData:new( self.image,
+                                            (f-1) * self.frames.w,
+                                            0,
+                                            self.frames.w * self.frames.total,
+                                            self.frames.h                        )
+    end
 end
 
 
@@ -109,16 +117,6 @@ end
 --  Load callback
 --
 function Helicopter:load ()
-    -- Load the image
-    self.image = love.graphics.newImage(self.imgPath)
-    -- populate frames list
-    for f=1,self.frames.total do
-        self.frames.list[f] = love.graphics.newQuad((f-1) * self.frames.w,
-                                                    0,
-                                                    self.frames.w,
-                                                    self.frames.h,
-                                                    self.image:getDimensions()  ) 
-    end
 end
 
 
@@ -128,7 +126,6 @@ end
 --
 function Helicopter:update (dt)
     self:animate(dt)
-    self.image = love.graphics.newImage(self.imgPath)
 end
 
 
@@ -138,9 +135,10 @@ end
 --
 function Helicopter:draw ()
     love.graphics.draw(self.image,
-                       self.frames.list[self.frames.current],
+                       self.frames.list[self.frames.current].quad,
                        self.x,
                        self.y   )
+    print(self.frames.list[self.frames.current].quad:getTextureDimensions())
 end
 
 
