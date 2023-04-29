@@ -61,7 +61,7 @@ function Helicopter:load ()
     self.image = love.graphics.newImage(self.imgPath)
     -- populate frames list
     for f=1,self.frames.total do
-        self.frames.list[f] = love.graphics.newQuad(f * self.frames.w,
+        self.frames.list[f] = love.graphics.newQuad((f-1) * self.frames.w,
                                                     0,
                                                     self.frames.w,
                                                     self.frames.h,
@@ -80,7 +80,7 @@ function Helicopter:animate (dt)
     -- Increment frame if delay has been passed
     if self.delay <= self.elapsedTime then
         self.elapsedTime = self.elapsedTime - self.delay
-        self.frames.current = self.frames.current % (self.frames.total-1) + 1
+        self.frames.current = self.frames.current % (self.frames.total) + 1
     end
 end
 
