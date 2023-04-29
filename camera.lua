@@ -47,9 +47,9 @@ end
 --  Set the camera according to the current state
 --
 function Camera:set ()
-    x,y = self.x, self.y
-    scaleX,scaleY = 1/self.scaleX, 1/self.scaleY
-    rotation = -self.rotation
+    local x,y = self.x, self.y
+    local scaleX,scaleY = 1/self.scaleX, 1/self.scaleY
+    local rotation = -self.rotation
     love.graphics.push()
     love.graphics.translate(x,y)
     love.graphics.scale(scaleX, scaleY)
