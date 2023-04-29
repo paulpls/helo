@@ -38,6 +38,11 @@ end
 --
 love.update = function (dt)
     player:update(dt)
+    if love.keyboard.isDown("space") then
+        player:move(0,1)
+    else
+        player:move()
+    end
 end
 
 

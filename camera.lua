@@ -22,7 +22,7 @@ Camera.bounds = {
                   y2 = 960
                             }
 --  Camera boundaries
-local clamp = function (x, min, max) return x < min and min or (x > max and max or x) end
+local clamp = function (n, min, max) return n < min and min or (n > max and max or n) end
 
 
 
