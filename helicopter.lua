@@ -138,7 +138,6 @@ function Helicopter:draw ()
                        self.frames.list[self.frames.current].quad,
                        self.x,
                        self.y   )
-    print(self.frames.list[self.frames.current].quad:getTextureDimensions())
 end
 
 
