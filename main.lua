@@ -32,7 +32,6 @@ require "camera"
 --  Load callbacks
 --
 love.load = function ()
-    
     --  Camera
     camera = Camera:new( cameraX,
                          cameraY,
@@ -88,7 +87,7 @@ end
 --  Exit strategies
 --
 love.quit = function ()
-    local msg = "Bye, Felicia"
+    local msg = "\nBye, Felicia"
     print(msg)
 end
 
