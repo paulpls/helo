@@ -17,15 +17,18 @@
 --
 --  Variables, imports, etc
 --
+local Camera = require "camera"
+local camera = Camera:new()
+
 local Helicopter = require "helicopter"
-local helo = Helicopter:new()
+local player = Helicopter:new()
 
 
 --
 --  Load callbacks
 --
 love.load = function ()
-    helo:load()
+    player:load()
 end
 
 
@@ -34,7 +37,7 @@ end
 --  Update callbacks
 --
 love.update = function (dt)
-    helo:update(dt)
+    player:update(dt)
 end
 
 
@@ -43,7 +46,7 @@ end
 --  Draw callbacks
 --
 love.draw = function ()
-    helo:draw()
+    player:draw()
 end
 
 
