@@ -1,16 +1,18 @@
----
----      s        s      soisoisois    s              isoiso
----     soi      soi    soisoisois    soi           oisoisoiso
----     ois      ois    ois           ois          ois      ois
----     isoisoisoiso    isoisoiso     iso          iso      iso
----     soisoisoisoi    soisoiso      soi          soi      soi
----     ois      ois    ois           ois          ois      ois
----     iso      iso    isoisoisoi    isoisoisoi    soisoisois
----      o        o      oisoisoiso    oisoisoiso     soisoi
----
---- Helo: Pixel-art helicopter game for the LOVE 2d game engine
---- Author: paulpls
----
+--[[
+
+         s        s      soisoisois    s              isoiso
+        soi      soi    soisoisois    soi           oisoisoiso
+        ois      ois    ois           ois          ois      ois
+        isoisoisoiso    isoisoiso     iso          iso      iso
+        soisoisoisoi    soisoiso      soi          soi      soi
+        ois      ois    ois           ois          ois      ois
+        iso      iso    isoisoisoi    isoisoisoi    soisoisois
+         o        o      oisoisoiso    oisoisoiso     soisoi
+   
+    Helo: Pixel-art helicopter game for the LOVE 2d game engine
+    Author: paulpls
+
+]]
 
 
 
