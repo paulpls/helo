@@ -2,40 +2,27 @@
 --- Camera controller
 ---
 
+Camera = class:new()
+
 
 
 --
---  Setup
+--  Camera init
 --
-local Camera = {}
-
---  Basic camera attributes
-Camera.x = 0
-Camera.y = 0
-Camera.scaleX = 1
-Camera.scaleY = 1
-Camera.rotation = 0
-Camera.bounds = {
-                  x1 = 0,
-                  y1 = 0,
-                  x2 = 544,
-                  y2 = 960
-                            }
---  Camera boundaries
-local clamp = function (n, min, max) return n < min and min or (n > max and max or n) end
-
-
-
-
--- 
---  Factory
--- 
-function Camera:new (o)
-    o = o or {}
-    setmetatable(o, self)
-    self.__index = self
-    return o
+function Camera:init (x, y, sX, sY, r, bounds)
+    Camera.x = x or cameraX
+    Camera.y = x or cameraY
+    Camera.scaleX = sX or cameraScaleX
+    Camera.scaleY = sY or cameraScaleY
+    Camera.rotation = r or cameraRotation
+    Camera.bounds = bounds or cameraBounds
 end
+
+
+--
+--  Clamp to boundaries
+--
+local clamp = function (n, min, max) return n < min and min or (n > max and max or n) end
 
 
 
@@ -202,10 +189,6 @@ end
 --
 function Camera:draw ()
 end
-
-
-
-return Camera
 
 
 

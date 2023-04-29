@@ -1,53 +1,64 @@
 ---
---- Helicopter prototype
+--- Walls prototype
 ---
 
-Helicopter = class:new()
-
-
-
---
---  init
---
-function Helicopter:init (x, y, speed, status, bounds, imgPath)
-    Helicopter.x = x or 0
-    Helicopter.y = y or 0
-    Helicopter.speed = speed or helicopterSpeed
-    Helicopter.status = status or {}
-    --  Boundaries
-    Helicopter.bounds = bounds or helicopterBounds
-    --  Image attributes
-    Helicopter.image = nil
-    Helicopter.imgPath = helicopterImgPath or imgPath
-    --  Animation-related things
-    Helicopter.frames = {}
-    Helicopter.frames.total = spriteFrames
-    Helicopter.frames.list = {}
-    Helicopter.frames.w = spriteWidth
-    Helicopter.frames.h = spriteHeight
-    Helicopter.frames.current = 1
-    Helicopter.delay = spriteAnimationDelay
-    Helicopter.elapsedTime = 0
-end
-
 
 
 --
+--  Setup
+--
+local Walls = {}
+
+--  Basic attributes
+Walls.x = 0
+Walls.y = 0
+Walls.status = {}
+--  Boundaries
+Walls.bounds = {
+                       x1 = 0,
+                       y1 = 0,
+                       x2 = 960 - 32,
+                       y2 = 544 - 32
+                            }
+--  Image attributes
+Walls.image = nil
+Walls.imgPath = "assets/img/helo.png"
+--  Animation-related things
+Walls.frames = {}
+Walls.frames.total = 8
+Walls.frames.list = {}
+Walls.frames.w = 32
+Walls.frames.h = 32
+Walls.frames.current = 1
+Walls.delay = 0.1
+Walls.elapsedTime = 0
+
 --  Clamp to window boundaries
---
 local clamp = function (n, min, max) return n < min and min or (n > max and max or n) end
+
+
+
+--
+--  Factory
+--
+function Walls:new (o)
+    o = o or {}
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
 
 
 
 --
 --  Debug
 --
-function Helicopter:debugPrint ()
+function Walls:debugPrint ()
     msg = {
             "x:     "..self.x.."\n",
             "y:     "..self.y.."\n",
                                      } 
-    print("-- Helicopter info: ---\n"..table.concat(msg))
+    print("-- Walls info: ---\n"..table.concat(msg))
 end
 
 
@@ -55,7 +66,7 @@ end
 --
 --  Animation
 --
-function Helicopter:animate (dt)
+function Walls:animate (dt)
     -- Add to elapsed time
     self.elapsedTime = self.elapsedTime + dt
     -- Increment frame if delay has been passed
@@ -70,7 +81,7 @@ end
 --
 --  Set helicopter x coordinate and check bounds
 --
-function Helicopter:setX (x)
+function Walls:setX (x)
     if self.bounds then
         self.x = clamp(x, self.bounds.x1, self.bounds.x2)
     else
@@ -83,7 +94,7 @@ end
 --
 --  Set helicopter y coordinate and check bounds
 --
-function Helicopter:setY (y)
+function Walls:setY (y)
     if self.bounds then
         self.y = clamp(y, self.bounds.y1, self.bounds.y2)
     else
@@ -96,7 +107,7 @@ end
 --
 --  Move the helicopter
 --
-function Helicopter:move (dx,dy)
+function Walls:move (dx,dy)
     dx = dx or 0
     dy = dy or -1
     self:setX(self.x - dx)
@@ -108,7 +119,7 @@ end
 --
 --  Load callback
 --
-function Helicopter:load ()
+function Walls:load ()
     -- Load the image
     self.image = love.graphics.newImage(self.imgPath)
     -- populate frames list
@@ -126,7 +137,7 @@ end
 --
 --  Update callback
 --
-function Helicopter:update (dt)
+function Walls:update (dt)
     self:animate(dt)
     self.image = love.graphics.newImage(self.imgPath)
 end
@@ -136,12 +147,16 @@ end
 --
 --  Draw callback
 --
-function Helicopter:draw ()
+function Walls:draw ()
     love.graphics.draw(self.image,
                        self.frames.list[self.frames.current],
                        self.x,
                        self.y   )
 end
+    
+
+
+return Walls
 
 
 

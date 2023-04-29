@@ -15,20 +15,39 @@
 
 
 --
---  Variables, imports, etc
+--  Imports
 --
-local Camera = require "camera"
-local camera = Camera:new()
+require "class"
+require "variables"
 
-local Helicopter = require "helicopter"
-local player = Helicopter:new()
+require "helicopter"
+require "camera"
+
 
 
 --
 --  Load callbacks
 --
 love.load = function ()
+    
+    --  Camera
+    camera = Camera:new( cameraX,
+                         cameraY,
+                         cameraScaleX,
+                         cameraScaleY,
+                         cameraRotation,
+                         cameraBounds    )
+    camera:load()
+
+    --  Player (Helicopter)
+    player = Helicopter:new( helicopterX,
+                             helicopterY,
+                             helicopterSpeed,
+                             helicopterStatus,
+                             helicopterBounds,
+                             helicopterImgPath  )
     player:load()
+
 end
 
 
@@ -37,12 +56,15 @@ end
 --  Update callbacks
 --
 love.update = function (dt)
-    player:update(dt)
+
+    --  Player (Helicopter)
     if love.keyboard.isDown("space") then
         player:move(0,1)
     else
         player:move()
     end
+    player:update(dt)
+
 end
 
 
@@ -51,7 +73,10 @@ end
 --  Draw callbacks
 --
 love.draw = function ()
+
+    --  Player (Helicopter)
     player:draw()
+
 end
 
 
