@@ -35,7 +35,7 @@ spriteAnimationDelay = 0.1
 --
 helicopterX = math.floor(windowWidth / 3) - math.floor(spriteWidth / 2)
 helicopterY = math.floor(windowHeight / 2) - math.floor(spriteHeight / 2)
-helicopterSpeed = 1.0
+helicopterSpeed = 3.0
 helicopterStatus = {}
 helicopterBounds = {
                         x1 = 0,

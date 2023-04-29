@@ -107,8 +107,8 @@ end
 function Helicopter:move (dx,dy)
     dx = dx or 0
     dy = dy or -1
-    self:setX(self.x - dx)
-    self:setY(self.y - dy)
+    self:setX(self.x - (dx * self.speed))
+    self:setY(self.y - (dy * self.speed))
 end
 
 
