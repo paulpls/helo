@@ -45,6 +45,7 @@ helicopterBounds = {
                         y2 = windowHeight - spriteHeight
                                                           }
 helicopterImgPath = "assets/img/helo.png"
+helicopterFireImgPath = "assets/img/helo_fire.png"
 helicopterFallDelay = 0.1
 
 

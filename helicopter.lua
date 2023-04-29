@@ -9,7 +9,7 @@ Helicopter = class:new()
 --
 --  init
 --
-function Helicopter:init (x, y, liftSpeed, dropSpeed, dropDelay, bounds, imgPath)
+function Helicopter:init (x, y, liftSpeed, dropSpeed, dropDelay, bounds)
     self.x = x or 0
     self.y = y or 0
     self.liftSpeed = liftSpeed or helicopterLiftSpeed
@@ -17,9 +17,13 @@ function Helicopter:init (x, y, liftSpeed, dropSpeed, dropDelay, bounds, imgPath
     self.dropDelay = dropDelay or helicopterDropDelay
     --  Boundaries
     self.bounds = bounds or helicopterBounds
-    --  Image attributes
-    self.imgPath = helicopterImgPath or imgPath
-    self.image = love.graphics.newImage(self.imgPath)
+    --  Image paths
+    self.imgPath = helicopterImgPath
+    self.fireImagePath = helicopterFireImgPath
+    --  Load images
+    self.image = love.graphics.newImage(self.imgPath)   --  current image
+    self.normalImage = love.graphics.newImage(self.imgPath)
+    self.fireImage = love.graphics.newImage(self.fireImagePath)
     --  Animation-related things
     self.frames = {}
     self.frames.total = spriteFrames
@@ -41,6 +45,7 @@ function Helicopter:init (x, y, liftSpeed, dropSpeed, dropDelay, bounds, imgPath
     self.fallElapsedTime = 0
     --  Statuses
     self.falling = false
+    self.crashed = false
 end
 
 
@@ -69,9 +74,9 @@ end
 --  Animation
 --
 function Helicopter:animate (dt)
-    -- Add to elapsed time
+    --  Add to elapsed time
     self.elapsedTime = self.elapsedTime + dt
-    -- Increment frame if delay has been passed
+    --  Increment frame if delay has been passed
     if self.delay <= self.elapsedTime then
         self.elapsedTime = self.elapsedTime - self.delay
         self.frames.current = self.frames.current % (self.frames.total) + 1
@@ -111,7 +116,7 @@ end
 --
 function Helicopter:move (dx, dy)
     dx = dx or 0
-    dy = dy or -1
+    dy = dy or 0
     if dy > 0 then
         dy = dy * self.liftSpeed
     elseif dy < 0 then
@@ -123,6 +128,26 @@ function Helicopter:move (dx, dy)
     end
     self:setX(self.x - dx)
     self:setY(self.y - dy)
+end
+
+
+
+--
+--  Collision detection
+--
+function Helicopter:detectCollisions ()
+
+    if not(self.crashed) then
+        --  Simplest case: Out of bottom or top bounds
+        local y = self.y
+        local top,bottom = self.bounds.y1, self.bounds.y2
+        local outOfBounds = y <= top or y >= bottom
+        if outOfBounds then
+            self.crashed = true
+            self.image = self.fireImage
+            return
+        end
+    end
 end
 
 
