@@ -30,6 +30,13 @@ require "block"
 
 
 --
+--  Locals
+--
+local collision = false
+
+
+
+--
 --  Load callbacks
 --
 love.load = function ()
@@ -54,9 +61,12 @@ love.load = function ()
     player:load()
 
 
-    -- Blocks
+    --  Blocks
     blocks = {}
-    --table.insert(blocks, Block:new(128,128,32,64))
+    table.insert(blocks, Block:new(player.x,16,32,64))
+    table.insert(blocks, Block:new(player.x,480,32,64))
+    table.insert(blocks, Block:new(player.x-64,300,32,64))
+    table.insert(blocks, Block:new(player.x+128,364,32,64))
 
 end
 
@@ -66,10 +76,17 @@ end
 --  Update callbacks
 --
 love.update = function (dt)
-
+    
     --  Player (Helicopter)
-    local dy = 0
+    local dx,dy = 0,0
     if not(player.crashed) then
+
+        if love.keyboard.isDown("left") then
+            dx = 1
+        elseif love.keyboard.isDown("right") then
+            dx = -1
+        end
+
         if love.keyboard.isDown("space") then
             dy = 1
             player.fallElapsedTime = 0
@@ -90,8 +107,12 @@ love.update = function (dt)
             end
         end
     end
-    player:move(0, dy)
-    player:detectCollisions()
+    player:move(dx, dy)
+    --  Crash the helicopter if any collisions detected
+    if player:detectCollisions() then player:crash() end
+    for _,b in ipairs(blocks) do
+        if player:detectCollisions(b.hitbox) then player:crash() end
+    end
     player:update(dt)
 
 end

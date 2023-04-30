@@ -17,6 +17,12 @@ function Block:init (x, y, width, height, moving, speed, bounds)
     self.moving = moving or blockMoving
     self.speed = speed or blockSpeed
     self.bounds = bounds or blockBounds
+    self.hitbox = {
+                      x1 = self.x,
+                      y1 = self.y,
+                      x2 = self.x + self.width,
+                      y2 = self.y + self.height
+                                                  }
 end
 
 
@@ -56,6 +62,20 @@ function Block:outOfBounds ()
     local y2 = self.y > self.bounds.y2
     return x1 or y1 or y2
 end
+
+
+
+--
+--  Update hitbox
+--
+function Block:updateHitbox ()
+    self.hitbox = {
+                      x1 = self.x,
+                      y1 = self.y,
+                      x2 = self.x + self.width,
+                      y2 = self.y + self.height
+                                                  }
+end
     
 
 
@@ -71,7 +91,7 @@ end
 --  Update callback
 --
 function Block:update (dt)
-    
+    self:updateHitbox()
 end
 
 

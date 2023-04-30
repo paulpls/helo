@@ -43,6 +43,13 @@ function Helicopter:init (x, y, liftSpeed, dropSpeed, dropDelay, bounds)
     end
     self.fallDelay = helicopterFallDelay
     self.fallElapsedTime = 0
+    --  Hitbox
+    self.hitbox = {
+                     x1 = self.x,
+                     y1 = self.y,
+                     x2 = self.x + self.frames.w,
+                     y2 = self.y + self.frames.h
+                                                   }
     --  Statuses
     self.falling = false
     self.crashed = false
@@ -94,6 +101,7 @@ function Helicopter:setX (x)
     else
         self.x = x
     end
+    self:updateHitbox()
 end
 
 
@@ -107,6 +115,7 @@ function Helicopter:setY (y)
     else
         self.y = y
     end
+    self:updateHitbox()
 end
 
 
@@ -133,21 +142,56 @@ end
 
 
 --
+--  Crash the helicopter
+--
+function Helicopter:crash ()
+    self.crashed = true
+    self.image = self.fireImage
+end
+
+
+
+--
+--  Update hitbox
+--
+function Helicopter:updateHitbox ()
+    self.hitbox = {
+                      x1 = self.x,
+                      y1 = self.y,
+                      x2 = self.x + self.frames.w,
+                      y2 = self.y + self.frames.h
+                                                    }
+end
+
+
+
+--
 --  Collision detection
 --
-function Helicopter:detectCollisions ()
-
-    if not(self.crashed) then
-        --  Simplest case: Out of bottom or top bounds
-        local y = self.y
-        local top,bottom = self.bounds.y1, self.bounds.y2
-        local outOfBounds = y <= top or y >= bottom
-        if outOfBounds then
-            self.crashed = true
-            self.image = self.fireImage
-            return
-        end
+function Helicopter:detectCollisions (hitbox)
+    --  If crashed, skip collision detection
+    if self.crashed then return end
+    --  Setup locals
+    local collision = false
+    local hurtbox = self.hitbox
+    --  Detect collision with provided hitbox
+    if hitbox then
+        local left = hurtbox.x2 >= hitbox.x1
+        local right = hurtbox.x1 <= hitbox.x2
+        local top = hurtbox.y2 >= hitbox.y1
+        local bottom = hurtbox.y1 <= hitbox.y2
+        if left and top and bottom and right then collision = true end
     end
+    --  Detect collision with boundaries if no hitbox is provided
+    if not(hitbox) then
+        local x,y = self.x, self.y
+        local left = hurtbox.x1 <= self.bounds.x1
+        local right = hurtbox.x2 >= self.bounds.x2
+        local top = hurtbox.y1 <= self.bounds.y1
+        local bottom = hurtbox.y2 >= self.bounds.y2
+        if left or right or top or bottom then collision = true end
+    end
+    return collision
 end
 
 
