@@ -120,6 +120,26 @@ function Block:updateHitbox ()
                       y2 = self.y + self.height
                                                   }
 end
+
+
+
+--
+--  Offscreen check
+--
+function Block:isOffscreen (bounds)
+    --  Define boundaries
+    local x1,y1 = self.x, self.y
+    local x2,y2 = self.x + self.width, self.y + self.height
+    local bx1, bx2 = bounds.x1, bounds.x2
+    local by1, by2 = bounds.y1, bounds.y2
+    --  Check each side of the window
+    local left = x2 < bx1    -- right edge of block is past the left edge
+    local right = x1 > bx2   -- left edge of block is past the right edge
+    local top = y2 < by1     -- top edge of block is past the bottom edge
+    local bottom = y1 > by2  -- bottom edge of block is past the top edge
+    --  Return offscreen status
+    return left or right or top or bottom
+end
     
 
 

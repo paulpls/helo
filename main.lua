@@ -172,10 +172,20 @@ love.update = function (dt)
             scoreElapsed = scoreElapsed + dt
         end
 
+        --  Delete off-screen blocks
+        for i,b in ipairs(blocks) do
+            if b:isOffscreen(camera.bounds) then
+                table.remove(blocks,i)
+            end
+        end
+
+        --  Crash Message
         if player.crashed then print("Your score: "..score) end
+
     end
 
     player:update(dt)
+
 
 end
 
