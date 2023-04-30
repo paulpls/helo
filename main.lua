@@ -91,12 +91,12 @@ love.load = function ()
     -- Randomly place some blocks
     for i=1,12 do
         rng = math.floor(math.random(8))
-        table.insert(blocks, Block:new(player.x+(128*i),windowHeight-math.floor(windowHeight/rng),128,196))
+        table.insert(blocks, Block:new(player.x+256+(128*i),windowHeight-math.floor(windowHeight/rng),128,196))
     end
     -- I didn't hear no bell!
     for i=1,12 do
         rng = math.floor(math.random(8))
-        table.insert(blocks, Block:new(player.x+(128*i),windowHeight-math.floor(windowHeight/rng),128,196))
+        table.insert(blocks, Block:new(player.x+256+(128*i),windowHeight-math.floor(windowHeight/rng),128,196))
     end
     
 
@@ -147,8 +147,9 @@ love.update = function (dt)
         for _,w in ipairs(walls) do w:move(-1,0,camera.speedX) end
 
         -- Update camera, wall, block, and player boundaries
-        camera:moveBounds(1)
-        player:moveBounds(1)
+        -- TODO debug methods to draw bounds, hitboxes, etc.
+        camera:moveBounds(camera.speedX)
+        player:moveBounds(camera.speedX)
 
         --  Crash the helicopter if collided with bounds
         if player:detectCollisions() then player:crash() end
