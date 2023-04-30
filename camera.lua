@@ -73,10 +73,10 @@ end
 --  Pan the camera
 --
 function Camera:pan (dx,dy)
-    local _dx = dx * self.speedX or 0
-    local _dy = dy * self.speedY or 0
-    self:setX(self.x + _dx)
-    self:setY(self.y + _dy)
+    local dx = dx or 0
+    local dy = dy or 0
+    self:setX(self.x - (dx * self.speedX))
+    self:setY(self.y - (dy * self.speedY))
 end
 
 
@@ -110,6 +110,7 @@ end
 function Camera:setX (x)
     if self.bounds then
         self.x = clamp(x, self.bounds.x1, self.bounds.x2)
+        self.x = x
     else
         self.x = x
     end

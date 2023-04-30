@@ -44,6 +44,8 @@ love.load = function ()
     --  Camera
     camera = Camera:new( cameraX,
                          cameraY,
+                         cameraSpeedX,
+                         cameraSpeedY,
                          cameraScaleX,
                          cameraScaleY,
                          cameraRotation,
@@ -61,11 +63,11 @@ love.load = function ()
                              helicopterBounds   )
     player:load()
 
-
     --  Walls
     walls = {}
     table.insert(walls, Block:new(0,0,windowWidth,wallHeight))
     table.insert(walls, Block:new(0,windowHeight-wallHeight,windowWidth,wallHeight))
+
     --  Blocks
     blocks = {}
     table.insert(blocks, Block:new(player.x,16,32,64))
@@ -127,6 +129,7 @@ love.update = function (dt)
 
     --  Update player
     player:update(dt)
+    camera:pan(1,0)
 
 end
 
@@ -137,18 +140,23 @@ end
 --
 love.draw = function ()
 
+    --  Set camera
+    camera:set()
+
     --  Draw the player
     love.graphics.setColor(1, 1, 1, 1)
     player:draw()
-
-
+    
     --  Draw walls
     love.graphics.setColor(0.25, 1, 0.33, 1)
     for _,w in ipairs(walls) do w:draw() end
-    
+
     --  Draw blocks
     love.graphics.setColor(0.25, 1, 0.33, 1)
     for _,b in ipairs(blocks) do b:draw() end
+
+    --  Unset camera
+    camera:unset()
 
 end
 
