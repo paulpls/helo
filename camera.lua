@@ -9,9 +9,11 @@ Camera = class:new()
 --
 --  Camera init
 --
-function Camera:init (x, y, sX, sY, r, bounds)
+function Camera:init (x, y, vX, vY, sX, sY, r, bounds)
     self.x = x or cameraX
     self.y = x or cameraY
+    self.speedX = vX or cameraSpeedX
+    self.speedY = vY or cameraSpeedY
     self.scaleX = sX or cameraScaleX
     self.scaleY = sY or cameraScaleY
     self.rotation = r or cameraRotation
@@ -71,9 +73,10 @@ end
 --  Pan the camera
 --
 function Camera:pan (dx,dy)
-    local _dx,_dy
-    self:setX(self.x + (dx or 0))
-    self:setY(self.y + (dy or 0))
+    local _dx = dx * self.speedX or 0
+    local _dy = dy * self.speedY or 0
+    self:setX(self.x + _dx)
+    self:setY(self.y + _dy)
 end
 
 

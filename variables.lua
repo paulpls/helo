@@ -76,6 +76,8 @@ helicopterHitbox = {
 --
 cameraX = 0
 cameraY = 0
+cameraSpeedX = 1
+cameraSpeedY = 1
 cameraScaleX = 1
 cameraScaleY = 1
 cameraRotation = 0
