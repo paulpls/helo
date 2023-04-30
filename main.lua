@@ -109,7 +109,7 @@ end
 --
 love.update = function (dt)
     
-    if not(player.crashed) then
+    if not player.crashed then
 
         --  Move the player
         local dx,dy = 0,0
@@ -123,7 +123,7 @@ love.update = function (dt)
             player.fallElapsedTime = 0
             player.falling = false
         else
-            if not(player.falling) then
+            if not player.falling then
                 --  Evaluate delay
                 if player.fallElapsedTime <= player.fallDelay then
                     player.fallElapsedTime = player.fallElapsedTime + dt
