@@ -22,6 +22,7 @@
 require "class"
 require "variables"
 
+require "game"
 require "quad"
 require "helicopter"
 require "camera"
@@ -40,10 +41,6 @@ math.randomseed(os.time())
 --  Locals
 --
 local collision = false
-local score = 0
-local scoreMultiplier = 1
-local scoreDelay = 0.25
-local scoreElapsed = 0
 local rng = math.random()
 
 
@@ -52,6 +49,9 @@ local rng = math.random()
 --  Load callbacks
 --
 love.load = function ()
+
+    --  Game state manager
+    game = Game:new() 
 
     --  Camera
     camera = Camera:new( cameraX,
@@ -108,8 +108,9 @@ end
 --  Update callbacks
 --
 love.update = function (dt)
-    
-    if not player.crashed then
+
+    --  Do movement/updates if game is running
+    if game:isRunning() then
 
         --  Move the player
         local dx,dy = 0,0
@@ -165,12 +166,7 @@ love.update = function (dt)
         end
 
         --  Update player score
-        if scoreElapsed >= scoreDelay then
-            score = score + scoreMultiplier
-            scoreElapsed = scoreElapsed - scoreDelay
-        else
-            scoreElapsed = scoreElapsed + dt
-        end
+        game:updateScore(dt)
 
         --  Delete off-screen blocks
         for i,b in ipairs(blocks) do
@@ -179,9 +175,15 @@ love.update = function (dt)
             end
         end
 
-        --  Crash Message
-        if player.crashed then print("Your score: "..score) end
+        --  End the game and print score to stdout if player crashes
+        if player.crashed then
+            game.over = true
+            print("Your score: "..game.score)
+        end
 
+    --  If game is not running, handle pause or gameover events
+    else
+        --  TODO Add paused/gameover functionality
     end
 
     player:update(dt)
