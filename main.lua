@@ -30,6 +30,13 @@ require "block"
 
 
 --
+--  RNGsus
+--
+math.randomseed(os.time())
+
+
+
+--
 --  Locals
 --
 local collision = false
@@ -37,6 +44,7 @@ local score = 0
 local scoreMultiplier = 1
 local scoreDelay = 0.25
 local scoreElapsed = 0
+local rng = math.random()
 
 
 
@@ -74,10 +82,23 @@ love.load = function ()
 
     --  Blocks
     blocks = {}
-    table.insert(blocks, Block:new(player.x,16,32,64))
-    table.insert(blocks, Block:new(player.x,480,32,64))
-    table.insert(blocks, Block:new(player.x-64,300,32,64))
-    table.insert(blocks, Block:new(player.x+128,364,32,64))
+    -- Use these for debugging the collision detectors
+    --table.insert(blocks, Block:new(player.x,16,32,64))
+    --table.insert(blocks, Block:new(player.x,480,32,64))
+    --table.insert(blocks, Block:new(player.x-64,300,32,64))
+    --table.insert(blocks, Block:new(player.x+128,364,32,64))
+    --
+    -- Randomly place some blocks
+    for i=1,12 do
+        rng = math.floor(math.random(8))
+        table.insert(blocks, Block:new(player.x+(128*i),windowHeight-math.floor(windowHeight/rng),128,196))
+    end
+    -- I didn't hear no bell!
+    for i=1,12 do
+        rng = math.floor(math.random(8))
+        table.insert(blocks, Block:new(player.x+(128*i),windowHeight-math.floor(windowHeight/rng),128,196))
+    end
+    
 
 end
 
