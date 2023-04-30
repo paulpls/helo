@@ -33,6 +33,10 @@ require "block"
 --  Locals
 --
 local collision = false
+local score = 0
+local scoreMultiplier = 1
+local scoreDelay = 0.25
+local scoreElapsed = 0
 
 
 
@@ -138,6 +142,15 @@ love.update = function (dt)
             if player:detectCollisions(b) then player:crash() end
         end
 
+        --  Update player score
+        if scoreElapsed >= scoreDelay then
+            score = score + scoreMultiplier
+            scoreElapsed = scoreElapsed - scoreDelay
+        else
+            scoreElapsed = scoreElapsed + dt
+        end
+
+        if player.crashed then print("Your score: "..score) end
     end
 
     player:update(dt)
