@@ -164,6 +164,25 @@ end
 
 
 --
+--  Move bounds
+--
+function Camera:moveBounds (dx,dy)
+    local dx = dx or 0
+    local dy = dy or 0
+    local x1,x2 = self.bounds.x1, self.bounds.x2
+    local y1,y2 = self.bounds.y1, self.bounds.y2
+    local bounds = {
+                       x1 = x1 + dx,
+                       x2 = x2 + dx,
+                       y1 = y1 + dy,
+                       y2 = y2 + dy
+                                      }
+    self:setBounds(bounds)
+end
+
+
+
+--
 --  Return the camera bounds
 --
 function Camera:getBounds ()

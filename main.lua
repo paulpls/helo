@@ -117,8 +117,12 @@ love.update = function (dt)
         player:move(dx,dy)
 
         --  Pan the cameera and move the player with it
-        camera:pan(1,0)
+        camera:pan(1)
         player:move(-1,0,camera.speedX)
+
+        -- Update camera and bounds
+        camera:moveBounds(1)
+        player:moveBounds(1)
 
         --  Crash the helicopter if collided with bounds
         if player:detectCollisions() then player:crash() end
