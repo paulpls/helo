@@ -57,8 +57,8 @@ love.load = function ()
                              helicopterY,
                              helicopterXSpeed,
                              helicopterLiftSpeed,
-                             helicopterDropSpeed,
-                             helicopterDropDelay,
+                             helicopterFallSpeed,
+                             helicopterFallDelay,
                              helicopterStatus,
                              helicopterBounds   )
     player:load()
@@ -130,6 +130,8 @@ love.update = function (dt)
     --  Update player
     player:update(dt)
     camera:pan(1,0)
+    player:move(-1,0,camera.speedX)
+
 
 end
 

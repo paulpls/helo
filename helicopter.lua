@@ -9,13 +9,13 @@ Helicopter = class:new()
 --
 --  init
 --
-function Helicopter:init (x, y, xSpeed, liftSpeed, dropSpeed, dropDelay, bounds, hitbox, hitboxTolerance)
+function Helicopter:init (x, y, speedX, liftSpeed, fallSpeed, fallDelay, bounds, hitbox, hitboxTolerance)
     self.x = x or 0
     self.y = y or 0
-    self.xSpeed = xSpeed or helicopterXSpeed
+    self.speedX = speedX or helicopterSpeedX
     self.liftSpeed = liftSpeed or helicopterLiftSpeed
-    self.dropSpeed = dropSpeed or helicopterDropSpeed
-    self.dropDelay = dropDelay or helicopterDropDelay
+    self.fallSpeed = fallSpeed or helicopterFallSpeed
+    self.fallDelay = fallDelay or helicopterFallDelay
     --  Boundaries
     self.bounds = bounds or helicopterBounds
     --  Image paths
@@ -120,14 +120,17 @@ end
 --
 --  Move the helicopter
 --
-function Helicopter:move (dx, dy)
-    dx = dx * self.xSpeed or 0
+function Helicopter:move (dx, dy, speedX, liftSpeed, fallSpeed)
+    speedX = speedX or self.speedX
+    liftSpeed = liftSpeed or self.liftSpeed
+    fallSpeed = fallSpeed or self.fallSpeed
+    dx = dx * speedX or 0
     dy = dy or 0
     if dy > 0 then
-        dy = dy * self.liftSpeed
+        dy = dy * liftSpeed
     elseif dy < 0 then
         if self.falling then
-            dy = dy * self.dropSpeed
+            dy = dy * fallSpeed
         else
             dy = 0
         end
