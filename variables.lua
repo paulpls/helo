@@ -9,7 +9,8 @@
 --
 windowWidth = 960
 windowHeight = 544
-windowMargin = 16
+windowMarginX = 16
+windowMarginY = 16
 windowTitle = "HELO"
 windowIconPath = "assets/img/icon.png"
 windowBounds = {
@@ -48,10 +49,10 @@ helicopterLiftSpeed = 2.0
 helicopterFallSpeed = 2.5
 helicopterFallDelay = 0.1
 helicopterBounds = {
-                        x1 = windowMargin,
-                        y1 = windowMargin,
-                        x2 = windowWidth - spriteWidth - windowMargin,
-                        y2 = windowHeight - spriteHeight - windowMargin
+                        x1 = windowMarginX,
+                        y1 = windowMarginY,
+                        x2 = windowWidth - spriteWidth - windowMarginX,
+                        y2 = windowHeight - spriteHeight - windowMarginY
                                                                           }
 helicopterImgPath = "assets/img/helo.png"
 helicopterFireImgPath = "assets/img/helo_fire.png"
@@ -90,14 +91,14 @@ cameraBounds = windowBounds
 blockWidth = 64
 blockHeight = 64
 blockX = windowWidth
-blockY = math.floor((windowHeight-(windowMargin*2)/2) - math.floor(blockHeight/2))
+blockY = math.floor((windowHeight-(windowMarginY*2)/2) - math.floor(blockHeight/2))
 blockMoving = false
 blockSpeed = 1
 blockBounds = {
-                  x1 = windowMargin - blockWidth,
-                  y1 = windowMarign,
-                  x2 = windowWidth - windowMargin,
-                  y2 = windowHeight - windowMargin
+                  x1 = windowMarginX - blockWidth,
+                  y1 = windowMarginY,
+                  x2 = windowWidth - windowMarginX,
+                  y2 = windowHeight - windowMarginY
                                                      }
 
 

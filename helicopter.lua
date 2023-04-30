@@ -196,12 +196,10 @@ function Helicopter:detectCollisions (obj)
     --  Detect collision with boundaries if no obj is provided
     else
         local hitbox = self.bounds
-        local x,y = self.x, self.y
-        local left = hurtbox.x2 <= hitbox.x1
-        local right = hurtbox.x1 >= hitbox.x2
+        local y = self.y
         local top = hurtbox.y2 <= hitbox.y1
         local bottom = hurtbox.y1 >= hitbox.y2
-        if left or right or top or bottom then
+        if top or bottom then
             collision = true
             print("Collided w/ bounds")
         end
