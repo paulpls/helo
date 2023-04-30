@@ -9,7 +9,7 @@ Helicopter = class:new()
 --
 --  init
 --
-function Helicopter:init (x, y, xSpeed, liftSpeed, dropSpeed, dropDelay, bounds)
+function Helicopter:init (x, y, xSpeed, liftSpeed, dropSpeed, dropDelay, bounds, hitbox, hitboxTolerance)
     self.x = x or 0
     self.y = y or 0
     self.xSpeed = xSpeed or helicopterXSpeed
@@ -45,12 +45,8 @@ function Helicopter:init (x, y, xSpeed, liftSpeed, dropSpeed, dropDelay, bounds)
     self.fallDelay = helicopterFallDelay
     self.fallElapsedTime = 0
     --  Hitbox
-    self.hitbox = {
-                     x1 = self.x,
-                     y1 = self.y,
-                     x2 = self.x + self.frames.w,
-                     y2 = self.y + self.frames.h
-                                                   }
+    self.hitbox = hitbox or helicopterHitbox
+    self.hitboxTolerance = hitboxTolerance or helicopterHitboxTolerance
     --  Statuses
     self.falling = false
     self.crashed = false
@@ -156,11 +152,14 @@ end
 --  Update hitbox
 --
 function Helicopter:updateHitbox ()
+    local x,y = self.x, self.y
+    local w,h = self.frames.w, self.frames.h
+    local t = self.hitboxTolerance
     self.hitbox = {
-                      x1 = self.x,
-                      y1 = self.y,
-                      x2 = self.x + self.frames.w,
-                      y2 = self.y + self.frames.h
+                      x1 = x + t.x1,
+                      y1 = y + t.y1,
+                      x2 = x + w - t.x2,
+                      y2 = y + h - t.y2
                                                     }
 end
 

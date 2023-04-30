@@ -49,6 +49,18 @@ helicopterBounds = {
 helicopterImgPath = "assets/img/helo.png"
 helicopterFireImgPath = "assets/img/helo_fire.png"
 helicopterFallDelay = 0.1
+helicopterHitboxTolerance = {
+                                x1 = 2,
+                                y1 = 6,
+                                x2 = 2,
+                                y2 = 9
+                                         }
+helicopterHitbox = {
+                       x1 = helicopterX + helicopterHitboxTolerance.x1,
+                       y1 = helicopterY + helicopterHitboxTolerance.y1,
+                       x2 = helicopterX + spriteWidth - helicopterHitboxTolerance.x2,
+                       y2 = helicopterY + spriteHeight - helicopterHitboxTolerance.y2
+                                                     }
 
 
 
