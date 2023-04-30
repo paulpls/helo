@@ -32,15 +32,14 @@ end
 --
 function Block:debugPrint ()
     msg = {
-            "x:     "..self.x.."\n",
-            "y:     "..self.y.."\n",
-            "width:     "..self.width.."\n",
-            "height:     "..self.height.."\n",
-            "moving:     "..self.moving.."\n",
-            "speed:     "..self.speed.."\n",
-            "bounds:     "..table.concat(self.bounds).."\n",
+            "x:      "..self.x.."\n",
+            "y:      "..self.y.."\n",
+            "width:  "..self.width.."\n",
+            "height: "..self.height.."\n",
+            "moving: "..tostring(self.moving).."\n",
+            "speed:  "..self.speed.."\n",
                                      } 
-    print("-- Helicopter info: ---\n"..table.concat(msg))
+    print("-- Block info: ---\n"..table.concat(msg))
 end
 
 

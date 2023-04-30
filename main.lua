@@ -112,7 +112,7 @@ love.update = function (dt)
     --  Crash the helicopter if any collisions detected
     if player:detectCollisions() then player:crash() end
     for _,b in ipairs(blocks) do
-        if player:detectCollisions(b.hitbox) then player:crash() end
+        if player:detectCollisions(b) then player:crash() end
     end
     player:update(dt)
 

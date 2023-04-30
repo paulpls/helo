@@ -168,29 +168,42 @@ end
 --
 --  Collision detection
 --
-function Helicopter:detectCollisions (hitbox)
+function Helicopter:detectCollisions (obj)
+
     --  If crashed, skip collision detection
     if self.crashed then return end
+
     --  Setup locals
     local collision = false
     local hurtbox = self.hitbox
+
     --  Detect collision with provided hitbox
-    if hitbox then
+    if obj then
+        local hitbox = obj.hitbox
         local left = hurtbox.x2 >= hitbox.x1
         local right = hurtbox.x1 <= hitbox.x2
         local top = hurtbox.y2 >= hitbox.y1
         local bottom = hurtbox.y1 <= hitbox.y2
-        if left and top and bottom and right then collision = true end
-    end
-    --  Detect collision with boundaries if no hitbox is provided
-    if not(hitbox) then
+        if left and top and bottom and right then
+            collision = true
+            print("Collided w/ object:")
+            obj:debugPrint()
+        end
+
+    --  Detect collision with boundaries if no obj is provided
+    else
+        local hitbox = self.bounds
         local x,y = self.x, self.y
-        local left = hurtbox.x1 <= self.bounds.x1
-        local right = hurtbox.x2 >= self.bounds.x2
-        local top = hurtbox.y1 <= self.bounds.y1
-        local bottom = hurtbox.y2 >= self.bounds.y2
-        if left or right or top or bottom then collision = true end
+        local left = hurtbox.x2 <= hitbox.x1
+        local right = hurtbox.x1 >= hitbox.x2
+        local top = hurtbox.y2 <= hitbox.y1
+        local bottom = hurtbox.y1 >= hitbox.y2
+        if left or right or top or bottom then
+            collision = true
+            print("Collided w/ bounds")
+        end
     end
+
     return collision
 end
 
