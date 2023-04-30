@@ -1,6 +1,6 @@
----
---- Helicopter prototype
----
+--
+--  Helicopter prototype
+--
 
 Helicopter = class:new()
 

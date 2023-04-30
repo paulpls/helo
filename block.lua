@@ -1,6 +1,6 @@
----
---- Block mechanics
----
+--
+--  Block mechanics
+--
 
 Block = class:new()
 

@@ -1,6 +1,6 @@
----
---- Class prototyping
----
+--
+--  Class prototyping
+--
 
 
 

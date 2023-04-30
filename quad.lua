@@ -1,6 +1,6 @@
----
---- Quad Data
----
+--
+--  Quad Data
+--
 
 QuadData = class:new()
 

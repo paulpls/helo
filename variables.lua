@@ -1,6 +1,6 @@
----
---- Global variable definitions
----
+--
+--  Global variable definitions
+--
 
 
 

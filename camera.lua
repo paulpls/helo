@@ -1,6 +1,6 @@
----
---- Camera controller
----
+--
+--  Camera controller
+--
 
 Camera = class:new()
 
