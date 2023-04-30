@@ -25,6 +25,7 @@ require "variables"
 require "quad"
 require "helicopter"
 require "camera"
+require "block"
 
 
 
@@ -51,6 +52,11 @@ love.load = function ()
                              helicopterStatus,
                              helicopterBounds   )
     player:load()
+
+
+    -- Blocks
+    blocks = {}
+    --table.insert(blocks, Block:new(128,128,32,64))
 
 end
 
@@ -99,6 +105,9 @@ love.draw = function ()
 
     --  Player (Helicopter)
     player:draw()
+    
+    --  Blocks
+    for _,b in ipairs(blocks) do b:draw() end
 
 end
 
