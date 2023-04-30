@@ -121,9 +121,11 @@ end
 --  Move the helicopter
 --
 function Helicopter:move (dx, dy, speedX, liftSpeed, fallSpeed)
-    speedX = speedX or self.speedX
-    liftSpeed = liftSpeed or self.liftSpeed
-    fallSpeed = fallSpeed or self.fallSpeed
+    local dx = dx or 0
+    local dy = dy or 0
+    local speedX = speedX or self.speedX
+    local liftSpeed = liftSpeed or self.liftSpeed
+    local fallSpeed = fallSpeed or self.fallSpeed
     dx = dx * speedX or 0
     dy = dy or 0
     if dy > 0 then

@@ -9,13 +9,14 @@ Block = class:new()
 --
 --  init
 --
-function Block:init (x, y, width, height, moving, speed, bounds)
+function Block:init (x, y, width, height, moving, speedX, speedY, bounds)
     self.x = x or blockX
     self.y = y or blockY
     self.width = width or blockWidth
     self.height = height or blockHeight
     self.moving = moving or blockMoving
-    self.speed = speed or blockSpeed
+    self.speedX = speedX or blockSpeedX
+    self.speedY = speedY or blockSpeedY
     self.bounds = bounds or blockBounds
     self.hitbox = {
                       x1 = self.x,
@@ -60,6 +61,50 @@ function Block:outOfBounds ()
     local y1 = self.y < self.bounds.y1
     local y2 = self.y > self.bounds.y2
     return x1 or y1 or y2
+end
+
+
+
+--
+--  Set block x coordinate and check bounds
+--
+function Block:setX (x)
+    if self.bounds then
+        self.x = clamp(x, self.bounds.x1, self.bounds.x2)
+    else
+        self.x = x
+    end
+    self:updateHitbox()
+end
+
+
+
+--
+--  Set block y coordinate and check bounds
+--
+function Block:setY (y)
+    if self.bounds then
+        self.y = clamp(y, self.bounds.y1, self.bounds.y2)
+    else
+        self.y = y
+    end
+    self:updateHitbox()
+end
+
+
+
+--
+--  Move the block
+--
+function Block:move (dx, dy, speedX, speedY)
+    local dx = dx or 0
+    local dy = dy or 0
+    local speedX = speedX or self.speedX
+    local speedY = speedY or self.speedY
+    dx = dx * speedX or 0
+    dy = dy * speedY or 0
+    self:setX(self.x - dx)
+    self:setY(self.y - dy)
 end
 
 

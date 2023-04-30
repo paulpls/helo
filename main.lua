@@ -116,11 +116,12 @@ love.update = function (dt)
         --  Move the player
         player:move(dx,dy)
 
-        --  Pan the cameera and move the player with it
+        --  Pan the cameera and move the player and walls with it
         camera:pan(1)
         player:move(-1,0,camera.speedX)
+        for _,w in ipairs(walls) do w:move(-1,0,camera.speedX) end
 
-        -- Update camera and bounds
+        -- Update camera, wall, block, and player boundaries
         camera:moveBounds(1)
         player:moveBounds(1)
 
