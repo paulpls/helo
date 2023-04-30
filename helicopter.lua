@@ -9,9 +9,10 @@ Helicopter = class:new()
 --
 --  init
 --
-function Helicopter:init (x, y, liftSpeed, dropSpeed, dropDelay, bounds)
+function Helicopter:init (x, y, xSpeed, liftSpeed, dropSpeed, dropDelay, bounds)
     self.x = x or 0
     self.y = y or 0
+    self.xSpeed = xSpeed or helicopterXSpeed
     self.liftSpeed = liftSpeed or helicopterLiftSpeed
     self.dropSpeed = dropSpeed or helicopterDropSpeed
     self.dropDelay = dropDelay or helicopterDropDelay
@@ -124,7 +125,7 @@ end
 --  Move the helicopter
 --
 function Helicopter:move (dx, dy)
-    dx = dx or 0
+    dx = dx * self.xSpeed or 0
     dy = dy or 0
     if dy > 0 then
         dy = dy * self.liftSpeed

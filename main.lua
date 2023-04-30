@@ -53,6 +53,7 @@ love.load = function ()
     --  Player (Helicopter)
     player = Helicopter:new( helicopterX,
                              helicopterY,
+                             helicopterXSpeed,
                              helicopterLiftSpeed,
                              helicopterDropSpeed,
                              helicopterDropDelay,
