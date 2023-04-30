@@ -35,6 +35,8 @@ function Camera:debugPrint ()
     msg = {
         "x:        "..self.x.."\n",
         "y:        "..self.y.."\n",
+        "speedX:   "..self.speedX.."\n",
+        "speedY:   "..self.speedY.."\n",
         "scaleX:   "..self.scaleX.."\n",
         "scaleY:   "..self.scaleY.."\n",
         "rotation: "..self.rotation.."\n",

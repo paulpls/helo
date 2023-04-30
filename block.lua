@@ -38,7 +38,7 @@ function Block:debugPrint ()
             "width:  "..self.width.."\n",
             "height: "..self.height.."\n",
             "moving: "..tostring(self.moving).."\n",
-            "speed:  "..self.speed.."\n",
+            "speed:  "..self.speedX..", "..self.speedY.."\n",
                                      } 
     print("-- Block info: ---\n"..table.concat(msg))
 end
