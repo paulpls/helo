@@ -105,7 +105,6 @@ function Block:draw ()
                              self.y,
                              self.width,
                              self.height    )
-    love.graphics.setColor(1,1,1,1)
 end
 
 

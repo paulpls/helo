@@ -62,6 +62,10 @@ love.load = function ()
     player:load()
 
 
+    --  Walls
+    walls = {}
+    table.insert(walls, Block:new(0,0,windowWidth,wallHeight))
+    table.insert(walls, Block:new(0,windowHeight-wallHeight,windowWidth,wallHeight))
     --  Blocks
     blocks = {}
     table.insert(blocks, Block:new(player.x,16,32,64))
@@ -78,16 +82,14 @@ end
 --
 love.update = function (dt)
     
-    --  Player (Helicopter)
+    --  Move the player
     local dx,dy = 0,0
     if not(player.crashed) then
-
         if love.keyboard.isDown("left") then
             dx = 1
         elseif love.keyboard.isDown("right") then
             dx = -1
         end
-
         if love.keyboard.isDown("space") then
             dy = 1
             player.fallElapsedTime = 0
@@ -109,11 +111,21 @@ love.update = function (dt)
         end
     end
     player:move(dx, dy)
-    --  Crash the helicopter if any collisions detected
+
+    --  Crash the helicopter if collided with bounds
     if player:detectCollisions() then player:crash() end
+
+    --  Crash the helicopter if collided with walls
+    for _,w in ipairs(walls) do
+        if player:detectCollisions(w) then player:crash() end
+    end
+
+    --  Crash the helicopter if collided with blocks
     for _,b in ipairs(blocks) do
         if player:detectCollisions(b) then player:crash() end
     end
+
+    --  Update player
     player:update(dt)
 
 end
@@ -125,10 +137,17 @@ end
 --
 love.draw = function ()
 
-    --  Player (Helicopter)
+    --  Draw the player
+    love.graphics.setColor(1, 1, 1, 1)
     player:draw()
+
+
+    --  Draw walls
+    love.graphics.setColor(0.25, 1, 0.33, 1)
+    for _,w in ipairs(walls) do w:draw() end
     
-    --  Blocks
+    --  Draw blocks
+    love.graphics.setColor(0.25, 1, 0.33, 1)
     for _,b in ipairs(blocks) do b:draw() end
 
 end

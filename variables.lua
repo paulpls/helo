@@ -22,6 +22,13 @@ windowBounds = {
 
 
 --
+--  Walls
+--
+wallHeight = 32
+
+
+
+--
 --  Sprites
 --
 spriteWidth = 32
