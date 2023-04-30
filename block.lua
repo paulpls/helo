@@ -100,11 +100,13 @@ end
 --  Draw callback
 --
 function Block:draw ()
+    love.graphics.setColor(0.25,1,0.33,1)
     love.graphics.rectangle( "fill",
                              self.x,
                              self.y,
                              self.width,
                              self.height    )
+    love.graphics.setColor(1,1,1,1)
 end
 
 
