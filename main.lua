@@ -84,9 +84,10 @@ end
 --
 love.update = function (dt)
     
-    --  Move the player
-    local dx,dy = 0,0
     if not(player.crashed) then
+
+        --  Move the player
+        local dx,dy = 0,0
         if love.keyboard.isDown("left") then
             dx = 1
         elseif love.keyboard.isDown("right") then
@@ -111,27 +112,30 @@ love.update = function (dt)
                 dy = -1
             end
         end
+
+        --  Move the player
+        player:move(dx,dy)
+
+        --  Pan the cameera and move the player with it
+        camera:pan(1,0)
+        player:move(-1,0,camera.speedX)
+
+        --  Crash the helicopter if collided with bounds
+        if player:detectCollisions() then player:crash() end
+
+        --  Crash the helicopter if collided with walls
+        for _,w in ipairs(walls) do
+            if player:detectCollisions(w) then player:crash() end
+        end
+
+        --  Crash the helicopter if collided with blocks
+        for _,b in ipairs(blocks) do
+            if player:detectCollisions(b) then player:crash() end
+        end
+
     end
-    player:move(dx, dy)
 
-    --  Crash the helicopter if collided with bounds
-    if player:detectCollisions() then player:crash() end
-
-    --  Crash the helicopter if collided with walls
-    for _,w in ipairs(walls) do
-        if player:detectCollisions(w) then player:crash() end
-    end
-
-    --  Crash the helicopter if collided with blocks
-    for _,b in ipairs(blocks) do
-        if player:detectCollisions(b) then player:crash() end
-    end
-
-    --  Update player
     player:update(dt)
-    camera:pan(1,0)
-    player:move(-1,0,camera.speedX)
-
 
 end
 
