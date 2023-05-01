@@ -18,6 +18,8 @@ function Camera:init (x, y, vX, vY, sX, sY, r, bounds)
     self.scaleY = sY or cameraScaleY
     self.rotation = r or cameraRotation
     self.bounds = bounds or cameraBounds
+    self.centerX = math.floor((self.bounds.x2 - self.bounds.x1) / 2)
+    self.centerY = math.floor((self.bounds.y2 - self.bounds.y1) / 2)
 end
 
 
@@ -116,6 +118,7 @@ function Camera:setX (x)
     else
         self.x = x
     end
+    self:recenter()
 end
 
 
@@ -129,6 +132,7 @@ function Camera:setY (y)
     else
         self.y = y
     end
+    self:recenter()
 end
 
 
@@ -154,6 +158,16 @@ end
 
 
 --
+--  Update the the camera's centerpoint
+--
+function Camera:recenter()
+    self.centerX = math.floor((self.bounds.x2 - self.bounds.x1) / 2)
+    self.centerY = math.floor((self.bounds.y2 - self.bounds.y1) / 2)
+end
+
+
+
+--
 --  Set camera bounds
 --
 --  `bounds` is a table with the following keys:
@@ -161,6 +175,7 @@ end
 --
 function Camera:setBounds (bounds)
     self.bounds = bounds
+    self:recenter()
 end
 
 
