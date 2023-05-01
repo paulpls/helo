@@ -56,7 +56,7 @@ if __name__ == "__main__":
     # Auto-commit enabled
     if autoCommit:
         # Grep the output of git status for any added changes
-        cmd = "grep -q 'nothing added to commit' <(git status)"
+        cmd = "git status | grep -q 'nothing added to commit'"
         # If the quiet grep returns 0 we're good to go
         clean = subprocess.run(cmd, shell=True).returncode == 0
         # If no changes have been added, auto-commit the output file
