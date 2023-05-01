@@ -7,11 +7,11 @@ To run:
 - Run `love .`
   
 Controls:
-|--------|-------------------------------------------|
+| Key    | Description                               |
+|-------:|-------------------------------------------|
 |`space` | Move the helicopter up                    |
 |`left`  | Move the helicopter left                  |
 |`right` | Move the helicopter right                 |
-|--------|-------------------------------------------|
 
 
 
