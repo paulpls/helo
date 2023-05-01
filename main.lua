@@ -34,6 +34,9 @@ require "block"
 --  RNGsus
 --
 math.randomseed(os.time())
+math.random()
+math.random()
+math.random()
 
 
 
@@ -154,9 +157,12 @@ love.update = function (dt)
             blockSpawnElapsed = blockSpawnElapsed + dt
         else
             blockSpawnElapsed = 0
-            table.insert(blocks, Block:spawn(true))
-            table.insert(blocks, Block:spawn())
+            table.insert(blocks, Block:spawn(camera.bounds.x2, true))
+            table.insert(blocks, Block:spawn(camera.bounds.x2))
         end
+
+        --  Update block spawning parameters
+        Block.updateSpawn(camera.bounds)
 
         --  End the game and print score to stdout if player crashes
         if player.crashed then
@@ -170,7 +176,6 @@ love.update = function (dt)
     end
 
     player:update(dt)
-
 
 end
 
