@@ -114,7 +114,8 @@ blockMaxDeviation = 8
 --  Colors
 --
 colorDefault = {1, 1, 1, 1}
-colorRainbow = false
+colorRainbow = true
+colorRainbowResolution = 511
 
 
 
