@@ -22,6 +22,7 @@
 require "class"
 require "variables"
 
+require "font"
 require "color"
 require "game"
 require "quad"
@@ -68,6 +69,11 @@ love.load = function ()
 
     --  Game state manager
     game = Game:new() 
+
+
+    --  Font
+    font = Font:new()
+    font:load()
 
     --  Camera
     camera = Camera:new( cameraX,
@@ -216,8 +222,26 @@ love.draw = function ()
     --  Draw blocks
     for _,b in ipairs(blocks) do b:draw() end
 
+
+    --  TODO Draw score in top left corner
+    --local scoreX,scoreY = camera.bounds.x1 + 8, camera.bounds.y1 + 8
+    --local scoreW,scoreH = (#tostring(game.score) * fontWidth) + 8, fontHeight + 8
+    --love.graphics.setColor(0,0,0)
+    --love.graphics.rectangle("fill", scoreX, scoreY, scoreW, scoreH)
+    --love.graphics.setColor(colorDefault)
+    --love.graphics.print(tostring(game.score), scoreY + 4, scoreY + 4)
+    
+
     --  Unset camera
     camera:unset()
+
+    if game.over then
+        local gameOverX = camera.centerX - (fontWidth * #msgGameOver)
+        local gameOverY = camera.centerY - math.floor(fontHeight / 2)
+        love.graphics.setColor(1,0,0)
+        love.graphics.print(msgGameOver, gameOverX, gameOverY)
+        love.graphics.print(msgGameOver, gameOverX+1, gameOverY) --  repeat for bold print
+    end
 
 end
 
@@ -227,8 +251,7 @@ end
 --  Exit strategies
 --
 love.quit = function ()
-    local msg = "\nBye, Felicia"
-    print(msg)
+    print(msgQuit)
 end
 
 

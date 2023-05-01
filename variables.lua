@@ -121,3 +121,21 @@ colorRainbowResolution = 1023
 
 
 
+--
+--  Fonts
+--
+fontPath = "assets/fonts/pixel.png"
+fontGlyphs = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+fontWidth = 11
+fontHeight = 16
+
+
+
+--
+--  Messages
+--
+msgGameOver = "GAME OVER"
+msgQuit = "Bye, Felicia"
+
+
+
