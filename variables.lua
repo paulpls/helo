@@ -93,6 +93,7 @@ blockHeight = 128
 blockMargin = 128
 blockX = windowWidth
 blockY = math.floor((windowHeight-(windowMarginY*2)/2) - math.floor(blockHeight/2))
+blockColor = {0.25, 1, 0.33}
 blockMoving = false
 blockSpeedX = 1
 blockSpeedY = 1
@@ -106,6 +107,14 @@ blockSpawnDelay = 0.1
 blockGapMinSize = 96
 blockGapMaxSize = math.floor(windowHeight * 0.5)
 blockMaxDeviation = 8
+
+
+
+--
+--  Colors
+--
+colorDefault = {1, 1, 1, 1}
+colorRainbow = false
 
 
 

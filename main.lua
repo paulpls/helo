@@ -22,6 +22,7 @@
 require "class"
 require "variables"
 
+require "color"
 require "game"
 require "quad"
 require "helicopter"
@@ -103,6 +104,8 @@ end
 --
 love.update = function (dt)
 
+    local color, colorIndex
+
     --  Do movement/updates if game is running
     if game:isRunning() then
 
@@ -168,8 +171,14 @@ love.update = function (dt)
             blockSpawnElapsed = blockSpawnElapsed + dt
         else
             blockSpawnElapsed = 0
-            table.insert(blocks, Block:spawn(camera.bounds.x2, true))
-            table.insert(blocks, Block:spawn(camera.bounds.x2))
+            --  Rainbow color cycle
+            if Color.rainbow then
+                colorIndex = (game.score % #Color.rainbowCycle) + 1
+                color = Color.rainbowCycle[colorIndex]
+            end
+            --  Insert new blocks
+            table.insert(blocks, Block:spawn(camera.bounds.x2, color, true))
+            table.insert(blocks, Block:spawn(camera.bounds.x2, color))
         end
 
         --  Update block spawning parameters
@@ -201,11 +210,10 @@ love.draw = function ()
     camera:set()
 
     --  Draw the player
-    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setColor(Color.default)
     player:draw()
 
     --  Draw blocks
-    love.graphics.setColor(0.25, 1, 0.33, 1)
     for _,b in ipairs(blocks) do b:draw() end
 
     --  Unset camera

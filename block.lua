@@ -15,11 +15,12 @@ Block.maxDeviation = blockMaxDeviation
 --
 --  Init
 --
-function Block:init (x, y, width, height, moving, speedX, speedY, bounds)
+function Block:init (x, y, width, height, color, moving, speedX, speedY, bounds)
     self.x = x or blockX
     self.y = y or blockY
     self.width = width or blockWidth
     self.height = height or blockHeight
+    self.color = color or blockColor
     self.moving = moving or blockMoving
     self.speedX = speedX or blockSpeedX
     self.speedY = speedY or blockSpeedY
@@ -152,8 +153,9 @@ end
 --
 --  Return a new randomly spawned block
 --
-function Block:spawn (x, above)
+function Block:spawn (x, color, above)
 
+    local c = color or self.color
     local above = above or false
     local w = blockWidth
     local y,h = 0, 0
@@ -167,7 +169,7 @@ function Block:spawn (x, above)
         h = windowHeight - y
     end
     --  Return new block instance
-    return Block:new(x,y,w,h)
+    return Block:new(x, y, w, h, c)
 end
 
 
@@ -222,7 +224,7 @@ end
 --  Draw callback
 --
 function Block:draw ()
-    love.graphics.setColor(0.25,1,0.33,1)
+    love.graphics.setColor(self.color)
     love.graphics.rectangle( "fill",
                              self.x,
                              self.y,
