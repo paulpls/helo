@@ -18,7 +18,7 @@ outpath = "TODO.md"
 outhead = "# TODO\n"
 outfmt = "- [ ] ({})[{}#L{}]:{}\n" # Not a forkbomb I promise
 autoCommit = False
-commitMsg = "\"Updated TODO (commit performed automatically by todo.py)\""
+commitMsg = "\"Updated TODO (commit performed automatically by \\`todo.py\\`)\""
 
 
 
