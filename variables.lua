@@ -107,6 +107,8 @@ blockSpawnDelay = 0.1
 blockGapMinSize = 96
 blockGapMaxSize = math.floor(windowHeight * 0.5)
 blockMaxDeviation = 8
+blockChangeSpawnpoint = 3
+blockChangeGap = 30
 
 
 
@@ -115,7 +117,7 @@ blockMaxDeviation = 8
 --
 colorDefault = {1, 1, 1, 1}
 colorRainbow = true
-colorRainbowResolution = 511
+colorRainbowResolution = 1023
 
 
 

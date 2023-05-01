@@ -184,16 +184,14 @@ function Block.updateSpawn (bounds)
     --  Randomize the y value change
     local m = rng(-1, 1)
     local dy = rng(0, Block.maxDeviation) * m
-    --  1-in-5 chance to change the y value
-    local changeY = rng(1,5) == 1
-    if changeY then
+    --  1-in-X chance to change the y value
+    if rng(1,blockChangeSpawnpoint) == 1 then
         y = clamp(math.floor(y + dy), ymin, ymax)
     end
     --  Randomize the gap size change
     local dg = rng(66, 150) / 100
-    --  1-in-20 chance to change the gap size
-    local changeG = rng(1,20) == 1
-    if changeG then
+    --  1-in-X chance to change the gap size
+    if rng(1,blockChangeGap) == 1 then
         g = clamp(math.floor(g * dg), gmin, gmax)
     end
     --  Set the changed values
