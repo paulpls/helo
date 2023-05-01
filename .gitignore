@@ -1,2 +1,10 @@
 # GIMP assets
 *.xcf
+
+
+
+# Swap files
+*.swp
+
+
+
