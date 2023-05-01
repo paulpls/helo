@@ -189,11 +189,7 @@ function Helicopter:detectCollisions (obj)
         local right = hurtbox.x1 <= hitbox.x2
         local top = hurtbox.y2 >= hitbox.y1
         local bottom = hurtbox.y1 <= hitbox.y2
-        if left and top and bottom and right then
-            collision = true
-            print("Collided w/ object:")
-            obj:debugPrint()
-        end
+        if left and top and bottom and right then collision = true end
 
     --  Detect collision with boundaries if no obj is provided
     else
@@ -201,10 +197,7 @@ function Helicopter:detectCollisions (obj)
         local y = self.y
         local top = hurtbox.y2 <= hitbox.y1
         local bottom = hurtbox.y1 >= hitbox.y2
-        if top or bottom then
-            collision = true
-            print("Collided w/ bounds")
-        end
+        if top or bottom then collision = true end
     end
 
     return collision
