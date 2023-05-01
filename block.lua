@@ -29,7 +29,7 @@ function Block:init (x, y, width, height, moving, speedX, speedY, bounds)
                       y1 = self.y,
                       x2 = self.x + self.width,
                       y2 = self.y + self.height
-                                                  }
+                  }
 end
 
 
@@ -45,7 +45,7 @@ function Block:debugPrint ()
             "height: "..self.height.."\n",
             "moving: "..tostring(self.moving).."\n",
             "speed:  "..self.speedX..", "..self.speedY.."\n",
-                                     } 
+          } 
     print("-- Block info: ---\n"..table.concat(msg))
 end
 
@@ -124,7 +124,7 @@ function Block:updateHitbox ()
                       y1 = self.y,
                       x2 = self.x + self.width,
                       y2 = self.y + self.height
-                                                  }
+                  }
 end
 
 

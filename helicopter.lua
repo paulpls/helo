@@ -68,7 +68,7 @@ function Helicopter:debugPrint ()
     msg = {
             "x:     "..self.x.."\n",
             "y:     "..self.y.."\n",
-                                     } 
+          } 
     print("-- Helicopter info: ---\n"..table.concat(msg))
 end
 
@@ -165,7 +165,7 @@ function Helicopter:updateHitbox ()
                       y1 = y + t.y1,
                       x2 = x + w - t.x2,
                       y2 = y + h - t.y2
-                                                    }
+                  }
 end
 
 
@@ -234,7 +234,7 @@ function Helicopter:moveBounds (dx,dy)
                        x2 = x2 + dx,
                        y1 = y1 + dy,
                        y2 = y2 + dy
-                                      }
+                   }
     self:setBounds(bounds)
 end
 

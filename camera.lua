@@ -33,15 +33,15 @@ local clamp = function (n, min, max) return n < min and min or (n > max and max 
 --
 function Camera:debugPrint ()
     msg = {
-        "x:        "..self.x.."\n",
-        "y:        "..self.y.."\n",
-        "speedX:   "..self.speedX.."\n",
-        "speedY:   "..self.speedY.."\n",
-        "scaleX:   "..self.scaleX.."\n",
-        "scaleY:   "..self.scaleY.."\n",
-        "rotation: "..self.rotation.."\n",
-        "",
-    }
+            "x:        "..self.x.."\n",
+            "y:        "..self.y.."\n",
+            "speedX:   "..self.speedX.."\n",
+            "speedY:   "..self.speedY.."\n",
+            "scaleX:   "..self.scaleX.."\n",
+            "scaleY:   "..self.scaleY.."\n",
+            "rotation: "..self.rotation.."\n",
+            "",
+          }
     print("-- Camera info: ---\n"..table.concat(msg))
 end
 
@@ -178,7 +178,7 @@ function Camera:moveBounds (dx,dy)
                        x2 = x2 + dx,
                        y1 = y1 + dy,
                        y2 = y2 + dy
-                                      }
+                   }
     self:setBounds(bounds)
 end
 
