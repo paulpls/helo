@@ -57,7 +57,8 @@ if __name__ == "__main__":
     if autoCommit:
         # Grep the output of git status for any added changes
         cmd = "grep -q 'Changes to be committed:' <(git status)"
-        clean = subprocess.run(cmd, shell=True).returncode == 0
+        # If the quiet grep returns 0 it's no-go
+        clean = not subprocess.run(cmd, shell=True).returncode
         # If no changes have been added, auto-commit the output file
         if clean:
             add = f"git add {outpath}"
