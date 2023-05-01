@@ -18,13 +18,14 @@ outpath = "TODO.md"
 outhead = "# TODO\n"
 outfmt = "- [ ] [{}]({}#L{}):{}\n" # Not a forkbomb I promise
 autoCommit = False
+note = "_NOTE: This file should be auto-generated using `todo.py`_  \n  \n"
 commitMsg = "\"Updated TODO (commit performed automatically by \\`todo.py\\`)\""
 
 
 
 if __name__ == "__main__":
 
-    out = [outhead]
+    out = [outhead, note]
     success = False
 
     # Get list of matches
@@ -54,7 +55,7 @@ if __name__ == "__main__":
             try:
                 same = [out[ln] == lines[ln] for ln in range(len(out))]
             except IndexError as e:
-                same = [false]
+                same = [False]
                 pass
         diff = not all(same)
         # Remove the file
