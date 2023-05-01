@@ -18,7 +18,7 @@ outpath = "TODO.md"
 outhead = "# TODO\n"
 outfmt = "- [ ] ({})[{}#L{}]:{}\n" # Not a forkbomb I promise
 autoCommit = True
-commitMsg = f"Updated TODO (commit performed automatically by `todo.py`)"
+commitMsg = "\"Updated TODO (commit performed automatically by todo.py)\""
 
 
 
@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
     # Remove old output file
     if path.exists(outpath):
-        rm = subprocess.run(f"rm {outpath}", capture_output=True)
+        rm = subprocess.run(f"rm {outpath}", shell=True, capture_output=True)
 
     # Add to new output file
     with open(outpath, "w") as f:
@@ -56,9 +56,9 @@ if __name__ == "__main__":
     # Auto-commit enabled
     if autoCommit:
         # Grep the output of git status for any added changes
-        cmd = "git status | grep -q 'nothing added to commit'"
-        # If the quiet grep returns 0 we're good to go
-        clean = subprocess.run(cmd, shell=True).returncode == 0
+        cmd = "git status | grep -q 'Changes to be committed:'"
+        # If the quiet grep returns 0 we're no good
+        clean = not subprocess.run(cmd, shell=True).returncode
         # If no changes have been added, auto-commit the output file
         if clean:
             add = f"git add {outpath}"
