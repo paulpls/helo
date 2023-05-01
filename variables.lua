@@ -89,7 +89,7 @@ cameraBounds = windowBounds
 --  Blocks
 --
 blockWidth = 64
-blockHeight = 64
+blockHeight = 128
 blockX = windowWidth
 blockY = math.floor((windowHeight-(windowMarginY*2)/2) - math.floor(blockHeight/2))
 blockMoving = false
@@ -101,6 +101,9 @@ blockBounds = {
                   x2 = windowWidth - windowMarginX,
                   y2 = windowHeight - windowMarginY
                                                      }
+blockSpawnDelay = 5.0
+blockGapMinSize = 64
+blockGapMaxSize = math.floor(windowHeight * (0.5))
 
 
 

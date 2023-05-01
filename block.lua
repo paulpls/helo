@@ -3,11 +3,17 @@
 --
 
 Block = class:new()
+--  These properties are shared for all block instances
+Block.spawnpoint = math.floor(windowHeight / 2)
+Block.gapMinSize = blockGapMinSize
+Block.gapMaxSize = blockGapMaxSize
+Block.gapSize = blockGapMaxSize
+Block.gapMultiplier = 1.0
 
 
 
 --
---  init
+--  Init
 --
 function Block:init (x, y, width, height, moving, speedX, speedY, bounds)
     self.x = x or blockX
@@ -139,6 +145,43 @@ function Block:isOffscreen (bounds)
     local bottom = y1 > by2  -- bottom edge of block is past the top edge
     --  Return offscreen status
     return left or right or top or bottom
+end
+
+
+
+--
+--  Return a new randomly spawned block
+--
+function Block:spawn (above)
+
+    print("Spawning new block...")
+    local above = above or false
+    local x = camera.bounds.x2 - 1
+    local w = blockWidth
+    local y,h = 0, 0
+    --  Spawn the block above the spawnpoint
+    if above then
+        y = 0
+        h = Block.spawnpoint - math.floor(Block.gapSize / 2)
+    --  Spawn the block below the spawnpoint
+    else
+        y = Block.spawnpoint + math.floor(Block.gapSize / 2)
+        h = windowHeight - y
+    end
+    --  Return new block instance
+    local newBlock = Block:new(x,y,w,h)
+    newBlock:debugPrint()
+    return newBlock
+end
+
+
+
+--
+--  Update spawnpoint and bounds
+--
+--  TODO Do some RNG magic to oscillate the spawnpoint and grow/shrink the gap
+--
+function Block:updateSpawn ()
 end
     
 

@@ -42,6 +42,7 @@ math.randomseed(os.time())
 --
 local collision = false
 local rng = math.random()
+local blockSpawnElapsed = 0
 
 
 
@@ -75,30 +76,9 @@ love.load = function ()
                              helicopterBounds   )
     player:load()
 
-    --  Walls
-    walls = {}
-    table.insert(walls, Block:new(0,0,windowWidth,wallHeight))
-    table.insert(walls, Block:new(0,windowHeight-wallHeight,windowWidth,wallHeight))
-
     --  Blocks
     blocks = {}
-    -- Use these for debugging the collision detectors
-    --table.insert(blocks, Block:new(player.x,16,32,64))
-    --table.insert(blocks, Block:new(player.x,480,32,64))
-    --table.insert(blocks, Block:new(player.x-64,300,32,64))
-    --table.insert(blocks, Block:new(player.x+128,364,32,64))
-    --
-    -- Randomly place some blocks
-    for i=1,12 do
-        rng = math.floor(math.random(8))
-        table.insert(blocks, Block:new(player.x+256+(128*i),windowHeight-math.floor(windowHeight/rng),128,196))
-    end
-    -- I didn't hear no bell!
-    for i=1,12 do
-        rng = math.floor(math.random(8))
-        table.insert(blocks, Block:new(player.x+256+(128*i),windowHeight-math.floor(windowHeight/rng),128,196))
-    end
-    
+     
 
 end
 
@@ -142,10 +122,9 @@ love.update = function (dt)
         --  Move the player
         player:move(dx,dy)
 
-        --  Pan the cameera and move the player and walls with it
+        --  Pan the cameera and move the player
         camera:pan(1)
         player:move(-1,0,camera.speedX)
-        for _,w in ipairs(walls) do w:move(-1,0,camera.speedX) end
 
         -- Update camera, wall, block, and player boundaries
         -- TODO debug methods to draw bounds, hitboxes, etc.
@@ -154,11 +133,6 @@ love.update = function (dt)
 
         --  Crash the helicopter if collided with bounds
         if player:detectCollisions() then player:crash() end
-
-        --  Crash the helicopter if collided with walls
-        for _,w in ipairs(walls) do
-            if player:detectCollisions(w) then player:crash() end
-        end
 
         --  Crash the helicopter if collided with blocks
         for _,b in ipairs(blocks) do
@@ -173,6 +147,15 @@ love.update = function (dt)
             if b:isOffscreen(camera.bounds) then
                 table.remove(blocks,i)
             end
+        end
+
+        --  Spawn new blocks as necessary
+        if blockSpawnElapsed <= blockSpawnDelay then
+            blockSpawnElapsed = blockSpawnElapsed + dt
+        else
+            blockSpawnElapsed = 0
+            table.insert(blocks, Block:spawn(true))
+            table.insert(blocks, Block:spawn())
         end
 
         --  End the game and print score to stdout if player crashes
@@ -204,10 +187,6 @@ love.draw = function ()
     --  Draw the player
     love.graphics.setColor(1, 1, 1, 1)
     player:draw()
-    
-    --  Draw walls
-    love.graphics.setColor(0.25, 1, 0.33, 1)
-    for _,w in ipairs(walls) do w:draw() end
 
     --  Draw blocks
     love.graphics.setColor(0.25, 1, 0.33, 1)
