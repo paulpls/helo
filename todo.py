@@ -16,7 +16,7 @@ pattern = "TODO"
 cmd = f"grep -n {pattern} {inpath}"
 outpath = "TODO.md"
 outhead = "# TODO\n"
-outfmt = "- [ ] ({})[{}#L{}]:{}\n" # Not a forkbomb I promise
+outfmt = "- [ ] [{}]({}#L{}):{}\n" # Not a forkbomb I promise
 autoCommit = False
 commitMsg = "\"Updated TODO (commit performed automatically by \\`todo.py\\`)\""
 
