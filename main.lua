@@ -9,7 +9,7 @@
         iso      iso    isoisoisoi    isoisoisoi    soisoisois
          o        o      oisoisoiso    oisoisoiso     soisoi
    
-    Helo: Pixel-art helicopter game for the LOVE 2d game engine
+    HELO: Pixel-art helicopter game for the LOVE 2d game engine
     Author: paulpls
 
 ]]
