@@ -112,9 +112,9 @@ love.update = function (dt)
         --  Move the player
         local dx,dy = 0,0
         if love.keyboard.isDown("left") then
-            dx = 1
-        elseif love.keyboard.isDown("right") then
             dx = -1
+        elseif love.keyboard.isDown("right") then
+            dx = 1
         end
         if love.keyboard.isDown("space") then
             dy = 1
@@ -139,9 +139,9 @@ love.update = function (dt)
         --  Move the player
         player:move(dx,dy)
 
-        --  Pan the cameera and move the player
+        --  Pan the camera and move the player
         camera:pan(1)
-        player:move(-1,0,camera.speedX)
+        player:move(1,0,camera.speedX)
 
         -- Update camera, wall, block, and player boundaries
         -- TODO debug methods to draw bounds, hitboxes, etc.

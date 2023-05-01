@@ -137,7 +137,7 @@ function Helicopter:move (dx, dy, speedX, liftSpeed, fallSpeed)
             dy = 0
         end
     end
-    self:setX(self.x - dx)
+    self:setX(self.x + dx)
     self:setY(self.y - dy)
 end
 
