@@ -5,8 +5,8 @@
 
 
 love.conf = function (table)
-    table.window.width = 960
-    table.window.height = 544
+    table.window.width = 640
+    table.window.height = 480
 end
 
 

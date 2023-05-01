@@ -7,8 +7,8 @@
 --
 --  Window
 --
-windowWidth = 960
-windowHeight = 544
+windowWidth = 640
+windowHeight = 480
 windowMarginX = 0
 windowMarginY = 0
 windowTitle = "HELO"
@@ -42,7 +42,7 @@ spriteAnimationDelay = 0.1
 --
 --  Helicopter
 --
-helicopterX = math.floor(windowWidth / 3) - math.floor(spriteWidth / 2)
+helicopterX = math.floor(windowWidth / 2.25) - math.floor(spriteWidth / 2)
 helicopterY = math.floor(windowHeight / 2) - math.floor(spriteHeight / 2)
 helicopterSpeedX = 3.0
 helicopterLiftSpeed = 2.0
@@ -88,8 +88,9 @@ cameraBounds = windowBounds
 --
 --  Blocks
 --
-blockWidth = 34
+blockWidth = 16
 blockHeight = 128
+blockMargin = 128
 blockX = windowWidth
 blockY = math.floor((windowHeight-(windowMarginY*2)/2) - math.floor(blockHeight/2))
 blockMoving = false
@@ -101,10 +102,10 @@ blockBounds = {
                   x2 = windowWidth - windowMarginX,
                   y2 = windowHeight - windowMarginY
               }
-blockSpawnDelay = 0.25
-blockGapMinSize = 128
+blockSpawnDelay = 0.1
+blockGapMinSize = 96
 blockGapMaxSize = math.floor(windowHeight * 0.5)
-blockMaxDeviation = 5
+blockMaxDeviation = 8
 
 
 

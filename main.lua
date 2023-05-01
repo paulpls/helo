@@ -34,17 +34,28 @@ require "block"
 --  RNGsus
 --
 math.randomseed(os.time())
-math.random()
-math.random()
-math.random()
-
+rng = function (n, m, o)
+    math.random()
+    math.random()
+    math.random()
+    n = n or 100
+    if m then
+        if o then
+            return math.random(n,m,o)
+        else
+            return math.random(n,m)
+        end
+    else
+        return math.random(n)
+    end
+end
+    
 
 
 --
 --  Locals
 --
 local collision = false
-local rng = math.random()
 local blockSpawnElapsed = 0
 
 

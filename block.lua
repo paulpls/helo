@@ -177,23 +177,23 @@ end
 --
 function Block.updateSpawn (bounds)
     --  Fetch current parameters
-    local y,ymin,ymax = Block.spawnpoint, bounds.y1, bounds.y2
+    local y,ymin,ymax = Block.spawnpoint, bounds.y1 + blockMargin, bounds.y2 - blockMargin
     local g,gmin,gmax = Block.gapSize, Block.gapMinSize, Block.gapMaxSize
     --  Randomize the y value change
-    math.random()
-    math.random()
-    math.random()
-    local m = math.random(-1, 1)
-    local dy = math.random(0, Block.maxDeviation) * m
-    --  Change the y value
-    y = clamp(y + dy, ymin, ymax) 
+    local m = rng(-1, 1)
+    local dy = rng(0, Block.maxDeviation) * m
+    --  1-in-5 chance to change the y value
+    local changeY = rng(1,5) == 1
+    if changeY then
+        y = clamp(math.floor(y + dy), ymin, ymax)
+    end
     --  Randomize the gap size change
-    math.random()
-    math.random()
-    math.random()
-    local dg = math.random(66, 150) / 100
-    --  Change the gap size
-    g = clamp(math.floor(g * dg), gmin, gmax)
+    local dg = rng(66, 150) / 100
+    --  1-in-20 chance to change the gap size
+    local changeG = rng(1,20) == 1
+    if changeG then
+        g = clamp(math.floor(g * dg), gmin, gmax)
+    end
     --  Set the changed values
     Block.spawnpoint = y
     Block.gapSize = g
