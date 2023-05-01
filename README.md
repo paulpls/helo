@@ -9,6 +9,8 @@
   
 HELO is a helicopter game clone created with the LÖVE 2D game engine.  
   
+Development for this game is a work-in-progress!
+  
 ## How to Do the Thing
 - Install [LÖVE](https://www.love2d.org)
 - Clone the repo and `cd` into it
