@@ -1,4 +1,3 @@
-# HELO
          s        s      soisoisois    s              isoiso
         soi      soi    soisoisois    soi           oisoisoiso
         ois      ois    ois           ois          ois      ois
@@ -10,12 +9,12 @@
   
 HELO is a helicopter game clone created with the LÖVE 2D game engine.  
   
-To run:
+## How to Do the Thing
 - Install [LÖVE](https://www.love2d.org)
 - Clone the repo and `cd` into it
 - Run `love .`
   
-Controls:
+## Controls
 | Key    | Description                               |
 |-------:|-------------------------------------------|
 |`space` | Move the helicopter up                    |
@@ -24,7 +23,7 @@ Controls:
 
 
 
-## TODO
+## To-Do List
 See [TODO](TODO.md)
 
 
