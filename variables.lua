@@ -9,8 +9,8 @@
 --
 windowWidth = 960
 windowHeight = 544
-windowMarginX = 16
-windowMarginY = 16
+windowMarginX = 0
+windowMarginY = 0
 windowTitle = "HELO"
 windowIconPath = "assets/img/icon.png"
 windowBounds = {
@@ -18,7 +18,7 @@ windowBounds = {
                     y1 = 0,
                     x2 = windowWidth,
                     y2 = windowHeight
-                                        }
+               }
 
 
 
@@ -48,26 +48,26 @@ helicopterSpeedX = 3.0
 helicopterLiftSpeed = 2.0
 helicopterFallSpeed = 2.5
 helicopterFallDelay = 0.1
-helicopterBounds = {
-                        x1 = windowMarginX,
-                        y1 = windowMarginY,
-                        x2 = windowWidth - spriteWidth - windowMarginX,
-                        y2 = windowHeight - spriteHeight - windowMarginY
-                                                                          }
-helicopterImgPath = "assets/img/helo.png"
-helicopterFireImgPath = "assets/img/helo_fire.png"
 helicopterHitboxTolerance = {
                                 x1 = 2,
                                 y1 = 6,
                                 x2 = 2,
                                 y2 = 9
-                                         }
+                            }
 helicopterHitbox = {
                        x1 = helicopterX + helicopterHitboxTolerance.x1,
                        y1 = helicopterY + helicopterHitboxTolerance.y1,
                        x2 = helicopterX + spriteWidth - helicopterHitboxTolerance.x2,
                        y2 = helicopterY + spriteHeight - helicopterHitboxTolerance.y2
-                                                     }
+                   }
+helicopterBounds = {
+                        x1 = windowMarginX - helicopterHitboxTolerance.x1,
+                        y1 = windowMarginY - helicopterHitboxTolerance.y1,
+                        x2 = windowWidth - (spriteWidth - helicopterHitboxTolerance.x2) - windowMarginX,
+                        y2 = windowHeight - (spriteHeight - helicopterHitboxTolerance.y2) - windowMarginY
+                   }
+helicopterImgPath = "assets/img/helo.png"
+helicopterFireImgPath = "assets/img/helo_fire.png"
 
 
 
@@ -100,7 +100,7 @@ blockBounds = {
                   y1 = windowMarginY,
                   x2 = windowWidth - windowMarginX,
                   y2 = windowHeight - windowMarginY
-                                                     }
+              }
 blockSpawnDelay = 0.25
 blockGapMinSize = 128
 blockGapMaxSize = math.floor(windowHeight * 0.5)
