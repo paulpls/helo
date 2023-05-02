@@ -1,27 +1,24 @@
-         s        s      soisoisois    s              isoiso
-        soi      soi    soisoisois    soi           oisoisoiso
-        ois      ois    ois           ois          ois      ois
-        isoisoisoiso    isoisoiso     iso          iso      iso
-        soisoisoisoi    soisoiso      soi          soi      soi
-        ois      ois    ois           ois          ois      ois
-        iso      iso    isoisoisoi    isoisoisoi    soisoisois
-         o        o      oisoisoiso    oisoisoiso     soisoi
+# ![HELO icon](assets/img/icon.png) HELO
+![Screenshot of gameplay](assets/img/screenshot.png)
   
-HELO is a helicopter game clone created with the LÖVE 2D game engine.  
+## About
+HELO is a helicopter game clone created with the LÖVE 2D game engine. In trying to get a feel for the basic LÖVE workflow, I decided to tackle building this project from the ground up. Development for this game is still a work-in-progress.  
   
-Development for this game is a work-in-progress!
-  
+
+
 ## How to Do the Thing
 - Install [LÖVE](https://www.love2d.org)
 - Clone the repo and `cd` into it
 - Run `love .`
   
+
+
 ## Controls
 | Key    | Description                               |
 |-------:|-------------------------------------------|
-|`space` | Move the helicopter up                    |
-|`left`  | Move the helicopter left                  |
-|`right` | Move the helicopter right                 |
+| space  | Move the helicopter up                    |
+| left   | Move the helicopter left                  |
+| right  | Move the helicopter right                 |
 
 
 
