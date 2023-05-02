@@ -93,6 +93,7 @@ love.load = function ()
                              helicopterY,
                              helicopterXSpeed,
                              helicopterLiftSpeed,
+                             helicopterLiftDelay,
                              helicopterFallSpeed,
                              helicopterFallDelay,
                              helicopterStatus,
@@ -117,29 +118,40 @@ love.update = function (dt)
     if game:isRunning() then
 
         --  Move the player
-        local dy = 0
-        if love.mouse.isDown(1) then
-            dy = 1
-            player.fallElapsedTime = 0
+        local dy = 1        --  Velocity
+        local dl,df = 1, 1  --  Lift / fall accel
+        --  Lift / Throttle
+        if love.mouse.isDown(1) or love.keyboard.isDown("space") then
             player.falling = false
-        else
-            if not player.falling then
-                --  Evaluate delay
-                if player.fallElapsedTime <= player.fallDelay then
-                    player.fallElapsedTime = player.fallElapsedTime + dt
-                    dy = 0
-                else
-                    player.falling = true
-                    player.fallElapsedTime = 0
-                    dy = -1
-                end
+            player.fallElapsedTime = 0
+            --  Evaluate lift acceleration
+            player.liftElapsedTime = player.liftElapsedTime + dt
+            if player.liftElapsedTime <= player.liftDelay then
+                dy = 1
+                dl = math.min(1, player.liftElapsedTime / player.liftDelay)
             else
+                player.lifting = true
+                dy = 1
+                dl = math.min(1.25, player.liftElapsedTime / player.liftDelay)
+            end
+        --  Falling / No throttle
+        else
+            player.lifting = false
+            player.liftElapsedTime = 0
+            --  Evaluate fall acceleration
+            player.fallElapsedTime = player.fallElapsedTime + dt
+            if player.fallElapsedTime <= player.fallDelay then
                 dy = -1
+                df = math.min(1, player.fallElapsedTime / player.fallDelay)
+            else
+                player.falling = true
+                dy = -1
+                df = math.min(1.25, player.fallElapsedTime / player.fallDelay)
             end
         end
 
         --  Move the player
-        player:move(0, dy)
+        player:move(0, dy, camera.speedX, player.liftSpeed * dl, player.fallSpeed * df)
 
         --  Pan the camera and move the player
         camera:pan(1)

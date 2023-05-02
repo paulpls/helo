@@ -9,7 +9,7 @@ Helicopter = class:new()
 --
 --  init
 --
-function Helicopter:init (x, y, speedX, liftSpeed, fallSpeed, fallDelay, bounds, hitbox, hitboxTolerance, scale)
+function Helicopter:init (x, y, speedX, liftSpeed, liftDelay, fallSpeed, fallDelay, bounds, hitbox, hitboxTolerance, scale)
 
     --  Coordinates
     self.x = x or 0
@@ -21,6 +21,8 @@ function Helicopter:init (x, y, speedX, liftSpeed, fallSpeed, fallDelay, bounds,
     --  Velocity and acceleration
     self.speedX = speedX or helicopterSpeedX
     self.liftSpeed = liftSpeed or helicopterLiftSpeed
+    self.liftDelay = liftDelay or helicopterLiftDelay
+    self.liftElapsedTime = 0
     self.fallSpeed = fallSpeed or helicopterFallSpeed
     self.fallDelay = fallDelay or helicopterFallDelay
     self.fallElapsedTime = 0
@@ -62,6 +64,7 @@ function Helicopter:init (x, y, speedX, liftSpeed, fallSpeed, fallDelay, bounds,
 
     --  Statuses
     self.falling = false
+    self.lifting = false
     self.crashed = false
 
 end
@@ -145,11 +148,7 @@ function Helicopter:move (dx, dy, speedX, liftSpeed, fallSpeed)
     if dy > 0 then
         dy = dy * liftSpeed
     elseif dy < 0 then
-        if self.falling then
-            dy = dy * fallSpeed
-        else
-            dy = 0
-        end
+        dy = dy * fallSpeed
     end
     self:setX(self.x + dx)
     self:setY(self.y - dy)
