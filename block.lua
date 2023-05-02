@@ -8,7 +8,8 @@ Block.spawnpoint = math.floor(windowHeight / 2)
 Block.gapMinSize = blockGapMinSize
 Block.gapMaxSize = blockGapMaxSize
 Block.gapSize = blockGapMaxSize
-Block.maxDeviation = blockMaxDeviation
+Block.randomSpawnGapMin = blockRandomSpawnGapMin
+Block.wallsDirection = true -- `true` for up, `false` for down
 
 
 
@@ -134,69 +135,93 @@ end
 --  Offscreen check
 --
 function Block:isOffscreen (bounds)
+
     --  Define boundaries
     local x1,y1 = self.x, self.y
     local x2,y2 = self.x + self.width, self.y + self.height
     local bx1, bx2 = bounds.x1, bounds.x2
     local by1, by2 = bounds.y1, bounds.y2
+
     --  Check each side of the window
     local left = x2 < bx1    -- right edge of block is past the left edge
     local right = x1 > bx2   -- left edge of block is past the right edge
     local top = y2 < by1     -- top edge of block is past the bottom edge
     local bottom = y1 > by2  -- bottom edge of block is past the top edge
+
     --  Return offscreen status
     return left or right or top or bottom
+
 end
 
 
 
 --
---  Return a new randomly spawned block
+--  Return new walls and update spawning parameters
 --
-function Block:spawn (x, color, above)
+function Block:spawnWalls (spawnX, spawnY, color)
 
+    local x,y = spawnX, spawnY
     local c = color or self.color
     local above = above or false
     local w = blockWidth
-    local y,h = 0, 0
+
     --  Spawn the block above the spawnpoint
-    if above then
-        y = 0
-        h = Block.spawnpoint - math.floor(Block.gapSize / 2)
+    local y1 = y
+    local h1 = math.max(Block.spawnpoint - math.ceil(Block.gapSize / 2), blockMargin)
+
     --  Spawn the block below the spawnpoint
-    else
-        y = Block.spawnpoint + math.floor(Block.gapSize / 2)
-        h = windowHeight - y
-    end
-    --  Return new block instance
-    return Block:new(x, y, w, h, c)
+    local y2 = math.min(Block.spawnpoint + math.floor(Block.gapSize / 2), camera.bounds.y2 - blockMargin)
+    local h2 = camera.bounds.y2 - y2
+
+    --  Update spawn parameters
+    Block.updateWalls(camera.bounds)
+
+    --  Return new block instances
+    return {
+               Block:new(x, y1, w, h1, c),
+               Block:new(x, y2, w, h2, c)
+           }
+
 end
 
 
 
 --
---  Update spawnpoint and bounds
+--  Update walls spawnpoint
 --
-function Block.updateSpawn (bounds)
+function Block.updateWalls (bounds)
+
     --  Fetch current parameters
     local y,ymin,ymax = Block.spawnpoint, bounds.y1 + blockMargin, bounds.y2 - blockMargin
-    local g,gmin,gmax = Block.gapSize, Block.gapMinSize, Block.gapMaxSize
+    --local g,gmin,gmax = Block.gapSize, Block.gapMinSize, Block.gapMaxSize
+
     --  Randomize the y value change
-    local m = rng(-1, 1)
-    local dy = rng(0, Block.maxDeviation) * m
-    --  1-in-X chance to change the y value
-    if rng(1,blockChangeSpawnpoint) == 1 then
-        y = clamp(math.floor(y + dy), ymin, ymax)
-    end
+    local dyList = {0, 1, 1, 1, 1, 1, 2, 3, 5, 8, 13, 21}
+
+    --  Get a random value from the table above
+    local dy = dyList[rng(1, #dyList)]
+
+    --  Subtract (move up) if direction is true, add (move down) if false
+    if Block.wallsDirection then dy = y - dy else dy = y + dy end
+
+    --  Clamp the changes to the boundaries
+    dy = clamp(math.floor(dy), ymin, ymax)
+
+    --  Reverse direction if top or bottom is reached
+    local wallsTop = y == ymin and Block.wallsDirection
+    local wallsBottom = y == ymax and not Block.wallsDirection
+    if wallsTop or wallsBottom then
+        Block.wallsDirection = not Block.wallsDirection
+
     --  Randomize the gap size change
-    local dg = rng(66, 150) / 100
-    --  1-in-X chance to change the gap size
-    if rng(1,blockChangeGap) == 1 then
-        g = clamp(math.floor(g * dg), gmin, gmax)
+    --local dg = rng(66, 150) / 100
+    --g = clamp(math.floor(g * dg), gmin, gmax)
     end
+
     --  Set the changed values
-    Block.spawnpoint = y
-    Block.gapSize = g
+    Block.spawnpoint = dy
+    --Block.gapSize = dg
+
 end
     
 
@@ -222,12 +247,14 @@ end
 --  Draw callback
 --
 function Block:draw ()
+
     love.graphics.setColor(self.color)
     love.graphics.rectangle( "fill",
                              self.x,
                              self.y,
                              self.width,
                              self.height    )
+
 end
 
 

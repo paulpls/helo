@@ -88,9 +88,9 @@ cameraBounds = windowBounds
 --
 --  Blocks
 --
-blockWidth = 16
+blockWidth = 32
 blockHeight = 128
-blockMargin = 128
+blockMargin = 32
 blockX = windowWidth
 blockY = math.floor((windowHeight-(windowMarginY*2)/2) - math.floor(blockHeight/2))
 blockColor = {0.25, 1, 0.33}
@@ -103,11 +103,10 @@ blockBounds = {
                   x2 = windowWidth - windowMarginX,
                   y2 = windowHeight - windowMarginY
               }
-blockSpawnDelay = 0.1
+blockSpawnDelay = 0.20
 blockGapMinSize = 96
-blockGapMaxSize = math.floor(windowHeight * 0.5)
-blockMaxDeviation = 8
-blockChangeSpawnpoint = 3
+blockRandomSpawnGapMin = 512
+blockGapMaxSize = math.floor(windowHeight * 0.75)
 blockChangeGap = 30
 
 
@@ -116,7 +115,7 @@ blockChangeGap = 30
 --  Colors
 --
 colorDefault = {1, 1, 1, 1}
-colorRainbow = true
+colorRainbow = false
 colorRainbowResolution = 1023
 
 

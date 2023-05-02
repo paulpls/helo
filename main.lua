@@ -70,7 +70,6 @@ love.load = function ()
     --  Game state manager
     game = Game:new() 
 
-
     --  Font
     font = Font:new()
     font:load()
@@ -99,7 +98,6 @@ love.load = function ()
 
     --  Blocks
     blocks = {}
-     
 
 end
 
@@ -183,12 +181,10 @@ love.update = function (dt)
                 color = Color.rainbowCycle[colorIndex]
             end
             --  Insert new blocks
-            table.insert(blocks, Block:spawn(camera.bounds.x2, color, true))
-            table.insert(blocks, Block:spawn(camera.bounds.x2, color))
+            local newWalls = Block:spawnWalls(camera.bounds.x2, camera.bounds.y1, color)
+            table.insert(blocks, newWalls[1])
+            table.insert(blocks, newWalls[2])
         end
-
-        --  Update block spawning parameters
-        Block.updateSpawn(camera.bounds)
 
         --  End the game and print score to stdout if player crashes
         if player.crashed then
@@ -222,7 +218,6 @@ love.draw = function ()
     --  Draw blocks
     for _,b in ipairs(blocks) do b:draw() end
 
-
     --  TODO Draw score in top left corner
     --local scoreX,scoreY = camera.bounds.x1 + 8, camera.bounds.y1 + 8
     --local scoreW,scoreH = (#tostring(game.score) * fontWidth) + 8, fontHeight + 8
@@ -231,7 +226,6 @@ love.draw = function ()
     --love.graphics.setColor(colorDefault)
     --love.graphics.print(tostring(game.score), scoreY + 4, scoreY + 4)
     
-
     --  Unset camera
     camera:unset()
 
