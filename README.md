@@ -17,6 +17,7 @@ HELO is a helicopter game clone created with the LÖVE 2D game engine. In trying
 | Key                | Description                               |
 |-------------------:|-------------------------------------------|
 | left mouse button  | Move the helicopter up                    |
+| spacebar           | Move the helicopter up                    |
 
 
 
