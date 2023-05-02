@@ -117,7 +117,11 @@ blockChangeGap = 30
 --  Trail
 --
 trailImgPath = "assets/img/trail.png"
-trailSpawnDelay = 0.1
+trailSpawnDelay = 0.125
+trailFrames = 8
+trailSpriteWidth = 16
+trailSpriteHeight = 16
+trailAnimationDelay = 0.25
 
 
 

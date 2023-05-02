@@ -54,6 +54,8 @@ function Helicopter:init (x, y, speedX, liftSpeed, liftDelay, fallSpeed, fallDel
         self.frames.list[f] = QuadData:new( self.image,
                                             (f-1) * self.frames.w,
                                             0,
+                                            self.frames.w,
+                                            self.frames.h,
                                             self.frames.w * self.frames.total,
                                             self.frames.h                        )
     end

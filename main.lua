@@ -121,7 +121,7 @@ love.update = function (dt)
 
     local color, colorIndex
 
-    --  Draw initial walls if at game start
+    --  Add initial walls if at game start
     if game.start then
         local startWallX = 0
         local startWallY1 = 0
@@ -245,6 +245,9 @@ love.update = function (dt)
     --  Unset game start flag if set
     if game.start then game.start = false end
 
+    --  Update trails
+    for _,t in ipairs(trails) do t:update(dt) end
+
     --  Update the player parameters
     player:update(dt)
 
@@ -263,7 +266,7 @@ love.draw = function ()
     --  Draw blocks
     for _,b in ipairs(blocks) do b:draw() end
 
-    --  Draw trail
+    --  Draw trails
     for _,t in ipairs(trails) do t:draw() end
 
     --  TODO Draw score in top left corner
