@@ -30,6 +30,7 @@ require "quad"
 require "helicopter"
 require "camera"
 require "block"
+require "trail"
 
 
 --
@@ -59,6 +60,7 @@ end
 --
 local collision = false
 local blockSpawnElapsed = 0
+local trailSpawnElapsed = 0
 
 
 
@@ -102,6 +104,9 @@ love.load = function ()
 
     --  Blocks
     blocks = {}
+
+    --  Trails
+    trails = {}
 
 end
 
@@ -196,6 +201,23 @@ love.update = function (dt)
             table.insert(blocks, newWalls[2])
         end
 
+        --  Delete off-screen trails
+        for i,t in ipairs(trails) do
+            if t:isOffscreen(camera.bounds.x1) then
+                table.remove(trails,i)
+            end
+        end
+
+        --  Spawn new trails as necessary
+        if trailSpawnElapsed <= trailSpawnDelay then
+            trailSpawnElapsed = trailSpawnElapsed + dt
+        else
+            trailSpawnElapsed = 0
+            --  Insert new trails
+            local newTrail = Trail:new(player.x, player.y + math.floor(player.frames.h / 2))
+            table.insert(trails, newTrail)
+        end
+
         --  End the game and print score to stdout if player crashes
         if player.crashed then
             game.over = true
@@ -227,6 +249,9 @@ love.draw = function ()
 
     --  Draw blocks
     for _,b in ipairs(blocks) do b:draw() end
+
+    --  Draw trail
+    for _,t in ipairs(trails) do t:draw() end
 
     --  TODO Draw score in top left corner
     --local scoreX,scoreY = camera.bounds.x1 + 8, camera.bounds.y1 + 8

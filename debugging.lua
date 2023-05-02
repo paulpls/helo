@@ -20,6 +20,7 @@ debugGame = false
 debugHelicopter = false
 debugMain = false
 debugQuad = false
+debugTrail = false
 
 
 

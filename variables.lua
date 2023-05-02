@@ -114,6 +114,14 @@ blockChangeGap = 30
 
 
 --
+--  Trail
+--
+trailImgPath = "assets/img/trail.png"
+trailSpawnDelay = 0.1
+
+
+
+--
 --  Colors
 --
 colorDefault = {1, 1, 1, 1}
