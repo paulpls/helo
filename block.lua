@@ -258,7 +258,7 @@ function Block:draw ()
                              self.height    )
 
     --  Draw debug overlays
-    if (not debug.none and debug.block) or debug.all then
+    if debugBlock and not debugNone or debugAll then
         --  Block outline
         love.graphics.setColor(1,0,0)
         love.graphics.rectangle( "line",
@@ -273,7 +273,6 @@ function Block:draw ()
                                  Block.spawnpoint,
                                  2,
                                  2                  )
-        print(Block.spawnpoint)
     end
 
 end

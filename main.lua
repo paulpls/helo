@@ -21,7 +21,7 @@
 --
 require "class"
 require "variables"
-require "debug"
+require "debugging"
 
 require "font"
 require "color"
@@ -30,7 +30,6 @@ require "quad"
 require "helicopter"
 require "camera"
 require "block"
-
 
 
 --
