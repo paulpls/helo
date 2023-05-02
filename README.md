@@ -1,4 +1,4 @@
-# ![HELO icon](assets/img/icon_64.png) HELO
+# ![HELO icon](assets/img/icon_32.png) HELO
 ![Screenshot of gameplay](assets/img/screenshot.png)
   
 ## About
