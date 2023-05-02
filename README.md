@@ -27,7 +27,7 @@ See [TODO](TODO.md)
 
 
 ## License
-This project is licensed under the [GNU Public License v3](LICENSE.md). You are free to use, distribute, or modify the source documents as you wish in accordance with these terms. Free software is essential to a fair and accessible future.
+This project is licensed under the [GNU General Public License v3.0](LICENSE.md). You are free to use, distribute, or modify the source documents as you wish in accordance with these terms. Free software is essential to a fair and accessible future.
 
 
 
