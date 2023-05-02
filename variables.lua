@@ -129,7 +129,7 @@ fontGlyphs = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 fontWidth = 11
 fontHeight = 16
 fontKerning = 3
-fontBoldWidth = 3
+fontBoldWidth = 2
 
 
 
