@@ -78,7 +78,7 @@ helicopterFireImgPath = "assets/img/helo_fire.png"
 --
 cameraX = 0
 cameraY = 0
-cameraSpeedX = 2
+cameraSpeedX = 3
 cameraSpeedY = 1
 cameraScaleX = 1
 cameraScaleY = 1
@@ -90,7 +90,7 @@ cameraBounds = windowBounds
 --
 --  Blocks
 --
-blockWidth = 32
+blockWidth = 34
 blockHeight = 128
 blockMargin = 64
 blockX = windowWidth
@@ -105,7 +105,7 @@ blockBounds = {
                   x2 = windowWidth - windowMarginX,
                   y2 = windowHeight - windowMarginY
               }
-blockSpawnDelay = 0.225
+blockSpawnDelay = 0.15
 blockGapMinSize = 96
 blockRandomSpawnGapMin = 512
 blockGapMaxSize = blockBounds.y2 - blockBounds.y1
@@ -117,7 +117,7 @@ blockChangeGap = 30
 --  Trail
 --
 trailImgPath = "assets/img/trail.png"
-trailSpawnDelay = 0.125
+trailSpawnDelay = 0.1
 trailFrames = 8
 trailSpriteWidth = 16
 trailSpriteHeight = 16
