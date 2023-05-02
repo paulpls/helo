@@ -235,12 +235,44 @@ love.draw = function ()
     --  Unset camera
     camera:unset()
 
+    --  Game Over overlay
     if game.over then
-        local gameOverX = camera.centerX - (fontWidth * #msgGameOver)
-        local gameOverY = camera.centerY - math.floor(fontHeight / 2)
+        --  Configure box parameters
+        --  TODO Move dialog box stuff to its own module
+        --
+        --  (X1,Y1)
+        --  @---------------------------------------.  -
+        --  |                                       |  |
+        --  |<--msgLength * fontWidth + 2*margin -->|  | fontHeight + 2*margin
+        --  |                                       |  |
+        --  '---------------------------------------'  -
+        --
+        local gameOverMargin = 8
+        local gameOverX1 = camera.centerX - math.floor(((fontWidth + fontKerning) * #msgGameOver) / 2) - gameOverMargin
+        local gameOverY1 = camera.centerY - math.floor(fontHeight / 2) - gameOverMargin
+        local gameOverW = ((fontWidth + fontKerning) * #msgGameOver) + (2 * gameOverMargin)
+        local gameOverH = fontHeight + (2 * gameOverMargin)
+        --  Draw the box
+        love.graphics.setColor(0,0,0)
+        love.graphics.rectangle( "fill",
+                                 gameOverX1,
+                                 gameOverY1,
+                                 gameOverW,
+                                 gameOverH
+                               )
+        --  Draw the box outline
+        love.graphics.setColor(1,1,1)
+        love.graphics.rectangle( "line",
+                                 gameOverX1,
+                                 gameOverY1,
+                                 gameOverW,
+                                 gameOverH
+                               )
+        --  Configure msg parameters
+        local gameOverMsgX,gameOverMsgY = gameOverX1 + gameOverMargin + fontKerning, gameOverY1 + gameOverMargin
+        --  Repeatedly draw the message to achieve a bold effect
         love.graphics.setColor(1,0,0)
-        love.graphics.print(msgGameOver, gameOverX, gameOverY)
-        love.graphics.print(msgGameOver, gameOverX+1, gameOverY) --  repeat for bold print
+        for o=0, fontBoldWidth-1 do love.graphics.print(msgGameOver, gameOverMsgX+o, gameOverMsgY) end
     end
 
 end
