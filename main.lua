@@ -67,6 +67,9 @@ local blockSpawnElapsed = 0
 --
 love.load = function ()
 
+    --  Use nearest-neighbor interpolation for scaling drawable objects
+    love.graphics.setDefaultFilter("nearest", "nearest")
+
     --  Game state manager
     game = Game:new() 
 

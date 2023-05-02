@@ -4,7 +4,7 @@
 --  Set these flags to `true` to ignore individual flags.
 --  NOTE `debugAll` overrides `debugNone`.
 --
-debugAll = false
+debugAll = true
 debugNone = false
 
 

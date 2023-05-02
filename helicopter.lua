@@ -9,22 +9,34 @@ Helicopter = class:new()
 --
 --  init
 --
-function Helicopter:init (x, y, speedX, liftSpeed, fallSpeed, fallDelay, bounds, hitbox, hitboxTolerance)
+function Helicopter:init (x, y, speedX, liftSpeed, fallSpeed, fallDelay, bounds, hitbox, hitboxTolerance, scale)
+
+    --  Coordinates
     self.x = x or 0
     self.y = y or 0
+
+    --  Scaling
+    self.scale = scale or helicopterScale
+
+    --  Velocity and acceleration
     self.speedX = speedX or helicopterSpeedX
     self.liftSpeed = liftSpeed or helicopterLiftSpeed
     self.fallSpeed = fallSpeed or helicopterFallSpeed
     self.fallDelay = fallDelay or helicopterFallDelay
+    self.fallElapsedTime = 0
+
     --  Boundaries
     self.bounds = bounds or helicopterBounds
+
     --  Image paths
     self.imgPath = helicopterImgPath
     self.fireImagePath = helicopterFireImgPath
+
     --  Load images
     self.image = love.graphics.newImage(self.imgPath)   --  current image
     self.normalImage = love.graphics.newImage(self.imgPath)
     self.fireImage = love.graphics.newImage(self.fireImagePath)
+
     --  Animation-related things
     self.frames = {}
     self.frames.total = spriteFrames
@@ -34,6 +46,7 @@ function Helicopter:init (x, y, speedX, liftSpeed, fallSpeed, fallDelay, bounds,
     self.frames.current = 1
     self.delay = spriteAnimationDelay
     self.elapsedTime = 0
+
     --  Build the frames list
     for f=1,self.frames.total do
         self.frames.list[f] = QuadData:new( self.image,
@@ -42,14 +55,15 @@ function Helicopter:init (x, y, speedX, liftSpeed, fallSpeed, fallDelay, bounds,
                                             self.frames.w * self.frames.total,
                                             self.frames.h                        )
     end
-    self.fallDelay = helicopterFallDelay
-    self.fallElapsedTime = 0
+    
     --  Hitbox
     self.hitbox = hitbox or helicopterHitbox
     self.hitboxTolerance = hitboxTolerance or helicopterHitboxTolerance
+
     --  Statuses
     self.falling = false
     self.crashed = false
+
 end
 
 
@@ -160,11 +174,12 @@ function Helicopter:updateHitbox ()
     local x,y = self.x, self.y
     local w,h = self.frames.w, self.frames.h
     local t = self.hitboxTolerance
+    local s = self.scale
     self.hitbox = {
-                      x1 = x + t.x1,
-                      y1 = y + t.y1,
-                      x2 = x + w - t.x2,
-                      y2 = y + h - t.y2
+                      x1 = x + (t.x1 * s),
+                      y1 = y + (t.y1 * s),
+                      x2 = x + ((w - t.x2) * s),
+                      y2 = y + ((h - t.y2) * s)
                   }
 end
 
@@ -254,10 +269,33 @@ end
 --  Draw callback
 --
 function Helicopter:draw ()
-    love.graphics.draw(self.image,
-                       self.frames.list[self.frames.current].quad,
-                       self.x,
-                       self.y   )
+
+    --  Draw the helicopter
+    love.graphics.draw( self.image,
+                        self.frames.list[self.frames.current].quad,
+                        self.x,
+                        self.y,
+                        0,
+                        self.scale,
+                        self.scale        )
+
+    --  Draw debug overlays
+    if debugBlock and not debugNone or debugAll then
+        --  Draw sprite outline
+        love.graphics.setColor(0,0,1)
+        love.graphics.rectangle( "line",
+                                 self.x,
+                                 self.y,
+                                 self.frames.w * self.scale,
+                                 self.frames.h * self.scale )
+        --  Draw hitbox
+        love.graphics.setColor(1,0,0)
+        love.graphics.rectangle( "line",
+                                 self.hitbox.x1,
+                                 self.hitbox.y1,
+                                 self.hitbox.x2 - self.hitbox.x1,
+                                 self.hitbox.y2 - self.hitbox.y1    )
+    end
 end
 
 
