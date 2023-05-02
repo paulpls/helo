@@ -117,13 +117,8 @@ love.update = function (dt)
     if game:isRunning() then
 
         --  Move the player
-        local dx,dy = 0,0
-        if love.keyboard.isDown("left") then
-            dx = -1
-        elseif love.keyboard.isDown("right") then
-            dx = 1
-        end
-        if love.keyboard.isDown("space") then
+        local dy = 0
+        if love.mouse.isDown(1) then
             dy = 1
             player.fallElapsedTime = 0
             player.falling = false
@@ -144,11 +139,11 @@ love.update = function (dt)
         end
 
         --  Move the player
-        player:move(dx,dy)
+        player:move(0, dy)
 
         --  Pan the camera and move the player
         camera:pan(1)
-        player:move(1,0,camera.speedX)
+        player:move(1, 0, camera.speedX)
 
         --  Update camera, wall, block, and player boundaries
         --  TODO debug methods to draw bounds, hitboxes, etc.
