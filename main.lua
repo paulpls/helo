@@ -258,7 +258,7 @@ love.draw = function ()
                                  gameOverH
                                )
         --  Draw the box outline
-        love.graphics.setColor(1,1,1)
+        love.graphics.setColor(1,0,0,1)
         love.graphics.rectangle( "line",
                                  gameOverX1,
                                  gameOverY1,
@@ -266,7 +266,8 @@ love.draw = function ()
                                  gameOverH
                                )
         --  Configure msg parameters
-        local gameOverMsgX,gameOverMsgY = gameOverX1 + gameOverMargin + fontKerning, gameOverY1 + gameOverMargin
+        local gameOverMsgX = math.floor(gameOverX1 + gameOverMargin + fontKerning)
+        local gameOverMsgY = math.floor(gameOverY1 + gameOverMargin)
         --  Repeatedly draw the message to achieve a bold effect
         love.graphics.setColor(1,0,0)
         for o=0, fontBoldWidth-1 do love.graphics.print(msgGameOver, gameOverMsgX+o, gameOverMsgY) end
