@@ -280,7 +280,7 @@ function Helicopter:draw ()
                         self.scale        )
 
     --  Draw debug overlays
-    if debugBlock and not debugNone or debugAll then
+    if debugHelicopter and not debugNone or debugAll then
         --  Draw sprite outline
         love.graphics.setColor(debugColorOutline)
         love.graphics.rectangle( "line",

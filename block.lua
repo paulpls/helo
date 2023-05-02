@@ -251,7 +251,11 @@ end
 function Block:draw ()
 
     love.graphics.setColor(self.color)
-    love.graphics.rectangle( "fill",
+    --  If not debugging, fill the whole block
+    local fill = ""
+    if debugBlock and not debugNone or debugAll then fill = "line" else fill = "fill" end
+    --  Draw the block
+    love.graphics.rectangle( fill,
                              self.x,
                              self.y,
                              self.width,
@@ -260,12 +264,12 @@ function Block:draw ()
     --  Draw debug overlays
     if debugBlock and not debugNone or debugAll then
         --  Block outline
-        love.graphics.setColor(debugColorHitbox)
-        love.graphics.rectangle( "line",
-                                 self.x,
-                                 self.y,
-                                 self.width,
-                                 self.height    )
+        --love.graphics.setColor(debugColorHitbox)
+        --love.graphics.rectangle( "line",
+        --                         self.x,
+        --                         self.y,
+        --                         self.width,
+        --                         self.height    )
         --  Spawnpoint
         love.graphics.setColor(debugColorMarker)
         love.graphics.rectangle( "fill",
