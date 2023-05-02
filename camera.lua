@@ -101,9 +101,9 @@ end
 --  unless `dy` is provided.
 --
 function Camera:scale (dx,dy)
-    dx = dx or 1                           -- setup x scale factor
-    self.scaleX = self.scaleX * dx         -- scale the x axis
-    self.scaleY = self.scaleY * (dy or dx) -- scale the y axis
+    dx = dx or 1                            --  setup x scale factor
+    self.scaleX = self.scaleX * dx          --  scale the x axis
+    self.scaleY = self.scaleY * (dy or dx)  --  scale the y axis
 end
 
 

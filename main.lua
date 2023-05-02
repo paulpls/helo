@@ -147,8 +147,8 @@ love.update = function (dt)
         camera:pan(1)
         player:move(1,0,camera.speedX)
 
-        -- Update camera, wall, block, and player boundaries
-        -- TODO debug methods to draw bounds, hitboxes, etc.
+        --  Update camera, wall, block, and player boundaries
+        --  TODO debug methods to draw bounds, hitboxes, etc.
         camera:moveBounds(camera.speedX)
         player:moveBounds(camera.speedX)
 

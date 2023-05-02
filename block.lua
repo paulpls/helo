@@ -143,10 +143,10 @@ function Block:isOffscreen (bounds)
     local by1, by2 = bounds.y1, bounds.y2
 
     --  Check each side of the window
-    local left = x2 < bx1    -- right edge of block is past the left edge
-    local right = x1 > bx2   -- left edge of block is past the right edge
-    local top = y2 < by1     -- top edge of block is past the bottom edge
-    local bottom = y1 > by2  -- bottom edge of block is past the top edge
+    local left = x2 < bx1   --  right edge of block is past the left edge
+    local right = x1 > bx2  --  left edge of block is past the right edge
+    local top = y2 < by1    --  top edge of block is past the bottom edge
+    local bottom = y1 > by2 --  bottom edge of block is past the top edge
 
     --  Return offscreen status
     return left or right or top or bottom
@@ -188,6 +188,8 @@ end
 
 --
 --  Update walls spawnpoint
+--
+--  TODO Make the top and bottom walls change independently of each other
 --
 function Block.updateWalls (bounds)
 
