@@ -257,6 +257,25 @@ function Block:draw ()
                              self.width,
                              self.height    )
 
+    --  Draw debug overlays
+    if (not debug.none and debug.block) or debug.all then
+        --  Block outline
+        love.graphics.setColor(1,0,0)
+        love.graphics.rectangle( "line",
+                                 self.x,
+                                 self.y,
+                                 self.width,
+                                 self.height    )
+        --  Spawnpoint
+        love.graphics.setColor(0,0,1)
+        love.graphics.rectangle( "fill",
+                                 camera.bounds.x2,
+                                 Block.spawnpoint,
+                                 2,
+                                 2                  )
+        print(Block.spawnpoint)
+    end
+
 end
 
 

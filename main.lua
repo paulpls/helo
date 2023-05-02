@@ -21,6 +21,7 @@
 --
 require "class"
 require "variables"
+require "debug"
 
 require "font"
 require "color"
