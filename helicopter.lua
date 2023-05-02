@@ -282,14 +282,14 @@ function Helicopter:draw ()
     --  Draw debug overlays
     if debugBlock and not debugNone or debugAll then
         --  Draw sprite outline
-        love.graphics.setColor(0,0,1)
+        love.graphics.setColor(debugColorOutline)
         love.graphics.rectangle( "line",
                                  self.x,
                                  self.y,
                                  self.frames.w * self.scale,
                                  self.frames.h * self.scale )
         --  Draw hitbox
-        love.graphics.setColor(1,0,0)
+        love.graphics.setColor(debugColorHitbox)
         love.graphics.rectangle( "line",
                                  self.hitbox.x1,
                                  self.hitbox.y1,
