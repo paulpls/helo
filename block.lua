@@ -16,11 +16,11 @@ Block.wallsDirection = true -- `true` for up, `false` for down
 --
 --  Init
 --
-function Block:init (x, y, width, height, color, moving, speedX, speedY, bounds)
+function Block:init (x, y, w, h, color, moving, speedX, speedY, bounds)
     self.x = x or blockX
     self.y = y or blockY
-    self.width = width or blockWidth
-    self.height = height or blockHeight
+    self.w = w or blockWidth
+    self.h = h or blockHeight
     self.color = color or blockColor
     self.moving = moving or blockMoving
     self.speedX = speedX or blockSpeedX
@@ -29,8 +29,8 @@ function Block:init (x, y, width, height, color, moving, speedX, speedY, bounds)
     self.hitbox = {
                       x1 = self.x,
                       y1 = self.y,
-                      x2 = self.x + self.width,
-                      y2 = self.y + self.height
+                      x2 = self.x + self.w,
+                      y2 = self.y + self.h
                   }
 end
 
@@ -43,8 +43,8 @@ function Block:debugPrint ()
     msg = {
             "x:      "..self.x.."\n",
             "y:      "..self.y.."\n",
-            "width:  "..self.width.."\n",
-            "height: "..self.height.."\n",
+            "w:      "..self.w.."\n",
+            "h:      "..self.h.."\n",
             "moving: "..tostring(self.moving).."\n",
             "speed:  "..self.speedX..", "..self.speedY.."\n",
           } 
@@ -111,8 +111,8 @@ function Block:updateHitbox ()
     self.hitbox = {
                       x1 = self.x,
                       y1 = self.y,
-                      x2 = self.x + self.width,
-                      y2 = self.y + self.height
+                      x2 = self.x + self.w,
+                      y2 = self.y + self.h
                   }
 end
 
@@ -125,7 +125,7 @@ function Block:isOffscreen (bounds)
 
     --  Define boundaries
     local x1,y1 = self.x, self.y
-    local x2,y2 = self.x + self.width, self.y + self.height
+    local x2,y2 = self.x + self.w, self.y + self.h
     local bx1, bx2 = bounds.x1, bounds.x2
     local by1, by2 = bounds.y1, bounds.y2
 
@@ -245,8 +245,8 @@ function Block:draw ()
     love.graphics.rectangle( fill,
                              self.x,
                              self.y,
-                             self.width,
-                             self.height    )
+                             self.w,
+                             self.h    )
 
     --  Draw debug overlays
     if debugBlock and not debugNone or debugAll then
@@ -255,8 +255,8 @@ function Block:draw ()
         --love.graphics.rectangle( "line",
         --                         self.x,
         --                         self.y,
-        --                         self.width,
-        --                         self.height    )
+        --                         self.w,
+        --                         self.h    )
         --  Spawnpoint
         love.graphics.setColor(debugColorMarker)
         love.graphics.rectangle( "fill",
