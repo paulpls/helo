@@ -42,7 +42,7 @@ spriteAnimationDelay = 0.1
 --
 --  Helicopter
 --
-helicopterX = math.floor(windowWidth / 2.25) - math.floor(spriteWidth / 2)
+helicopterX = math.floor(windowWidth / 3) - math.floor(spriteWidth / 2)
 helicopterY = math.floor(windowHeight / 2) - math.floor(spriteHeight / 2)
 helicopterScale = 2
 helicopterSpeedX = 3.0
