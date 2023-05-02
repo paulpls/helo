@@ -121,6 +121,17 @@ love.update = function (dt)
 
     local color, colorIndex
 
+    --  Draw initial walls if at game start
+    if game.start then
+        local startWallX = 0
+        local startWallY1 = 0
+        local startWallY2 = windowHeight - blockMargin
+        local startWallW = windowWidth + (2 * blockWidth)
+        local startWallH = blockMargin
+        table.insert(blocks, Block:new(startWallX, startWallY1, startWallW, startWallH))
+        table.insert(blocks, Block:new(startWallX, startWallY2, startWallW, startWallH))
+    end
+
     --  Do movement/updates if game is running
     if game:isRunning() then
 
@@ -139,7 +150,7 @@ love.update = function (dt)
             else
                 player.lifting = true
                 dy = 1
-                dl = math.min(1.25, player.liftElapsedTime / player.liftDelay)
+                dl = math.min(3.0, player.liftElapsedTime / player.liftDelay)
             end
         --  Falling / No throttle
         else
@@ -231,6 +242,10 @@ love.update = function (dt)
         --  TODO Add paused/gameover functionality
     end
 
+    --  Unset game start flag if set
+    if game.start then game.start = false end
+
+    --  Update the player parameters
     player:update(dt)
 
 end
@@ -245,10 +260,6 @@ love.draw = function ()
     --  Set camera
     camera:set()
 
-    --  Draw the player
-    love.graphics.setColor(Color.default)
-    player:draw()
-
     --  Draw blocks
     for _,b in ipairs(blocks) do b:draw() end
 
@@ -262,6 +273,10 @@ love.draw = function ()
     --love.graphics.rectangle("fill", scoreX, scoreY, scoreW, scoreH)
     --love.graphics.setColor(colorDefault)
     --love.graphics.print(tostring(game.score), scoreY + 4, scoreY + 4)
+
+    --  Draw the player over the rest of the objects
+    love.graphics.setColor(Color.default)
+    player:draw()
     
     --  Unset camera
     camera:unset()

@@ -46,8 +46,8 @@ helicopterX = math.floor(windowWidth / 3) - math.floor(spriteWidth / 2)
 helicopterY = math.floor(windowHeight / 2) - math.floor(spriteHeight / 2)
 helicopterScale = 2
 helicopterSpeedX = 3.0
-helicopterLiftSpeed = 2.0
-helicopterLiftDelay = 0.25
+helicopterLiftSpeed = 1.25
+helicopterLiftDelay = 0.5
 helicopterFallSpeed = 3.5
 helicopterFallDelay = 0.33
 helicopterHitboxTolerance = {
@@ -92,7 +92,7 @@ cameraBounds = windowBounds
 --
 blockWidth = 32
 blockHeight = 128
-blockMargin = 32
+blockMargin = 64
 blockX = windowWidth
 blockY = math.floor((windowHeight-(windowMarginY*2)/2) - math.floor(blockHeight/2))
 blockColor = {0.25, 1, 0.33}
@@ -108,7 +108,7 @@ blockBounds = {
 blockSpawnDelay = 0.225
 blockGapMinSize = 96
 blockRandomSpawnGapMin = 512
-blockGapMaxSize = math.floor(windowHeight * 0.75)
+blockGapMaxSize = blockBounds.y2 - blockBounds.y1
 blockChangeGap = 30
 
 

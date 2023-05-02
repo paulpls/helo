@@ -16,6 +16,7 @@ function Game:init ()
     self.scoreDelay = blockSpawnDelay
     self.scoreElapsed = 0
     --  Game event flags
+    self.start = true
     self.paused = false
     self.over = false
 end
