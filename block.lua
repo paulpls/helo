@@ -61,19 +61,6 @@ local clamp = function (n, min, max) return n < min and min or (n > max and max 
 
 
 --
---  Detect out-of-bounds
---
-function Block:outOfBounds ()
-    --  NOTE Not checking x2 because blocks spawn on that side
-    local x1 = self.x < self.bounds.x1
-    local y1 = self.y < self.bounds.y1
-    local y2 = self.y > self.bounds.y2
-    return x1 or y1 or y2
-end
-
-
-
---
 --  Set block x coordinate and check bounds
 --
 function Block:setX (x)
