@@ -30,7 +30,7 @@ wallHeight = 32
 
 
 --
---  Sprites
+--  Sprite defaults
 --
 spriteWidth = 32
 spriteHeight = 32
@@ -49,7 +49,7 @@ helicopterSpeedX = 3.0
 helicopterLiftSpeed = 1.25
 helicopterLiftDelay = 0.5
 helicopterFallSpeed = 3.5
-helicopterFallDelay = 0.33
+helicopterFallDelay = 0.25
 helicopterHitboxTolerance = {
                                 x1 = 2,
                                 y1 = 6,
@@ -116,7 +116,7 @@ blockChangeGap = 30
 --  Trail
 --
 trailImgPath = "assets/img/trail.png"
-trailSpawnDelay = 0.1
+trailSpawnDelay = 0.08
 trailFrames = 8
 trailSpriteWidth = 16
 trailSpriteHeight = 16
