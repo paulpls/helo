@@ -21,7 +21,7 @@ function Block:init (x, y, w, h, color, moving, speedX, speedY, bounds)
     self.y = y or blockY
     self.w = w or blockWidth
     self.h = h or blockHeight
-    self.color = color or blockColor
+    self.color = color or colorBlock
     self.moving = moving or blockMoving
     self.speedX = speedX or blockSpeedX
     self.speedY = speedY or blockSpeedY

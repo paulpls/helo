@@ -3,7 +3,11 @@
 --
 
 Color = {}
-Color.default = colorDefault or {1, 1, 1, 1}
+Color.default = colorDefault or {1, 1, 1}
+Color.background = colorBackground or {0, 0, 0}
+Color.text = colorText or {1, 1, 1}
+Color.gameOver = colorGameOver or {1, 0, 0}
+Color.block = colorBlock or {0.25, 1, 0.33}
 Color.rainbow = colorRainbow or false
 Color.rainbowResolution = colorRainbowResolution or 255
 

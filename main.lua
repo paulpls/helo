@@ -274,10 +274,10 @@ love.draw = function ()
     local scoreW = #scoreDisplay * (fontWidth + fontKerning)
     local scoreH = fontHeight + 8
     --  Draw the background
-    love.graphics.setColor(0,0,0)
+    love.graphics.setColor(Color.background)
     love.graphics.rectangle("fill", scoreX, scoreY, scoreW, scoreH)
     --  Draw the score display
-    love.graphics.setColor(colorDefault)
+    love.graphics.setColor(Color.text)
     love.graphics.print(scoreDisplay, scoreX + scoreOffset, scoreY + scoreOffset)
 
     --  Draw the player over the rest of the objects
@@ -305,7 +305,7 @@ love.draw = function ()
         local gameOverW = ((fontWidth + fontKerning) * #msgGameOver) + (2 * gameOverMargin)
         local gameOverH = fontHeight + (2 * gameOverMargin)
         --  Draw the box
-        love.graphics.setColor(0,0,0)
+        love.graphics.setColor(Color.background)
         love.graphics.rectangle( "fill",
                                  gameOverX1,
                                  gameOverY1,
@@ -313,7 +313,7 @@ love.draw = function ()
                                  gameOverH
                                )
         --  Draw the box outline
-        love.graphics.setColor(1,0,0,1)
+        love.graphics.setColor(Color.gameOver)
         love.graphics.rectangle( "line",
                                  gameOverX1,
                                  gameOverY1,
@@ -324,7 +324,7 @@ love.draw = function ()
         local gameOverMsgX = math.floor(gameOverX1 + gameOverMargin + fontKerning)
         local gameOverMsgY = math.floor(gameOverY1 + gameOverMargin)
         --  Repeatedly draw the message to achieve a bold effect
-        love.graphics.setColor(1,0,0)
+        love.graphics.setColor(Color.gameOver)
         for o=0, fontBoldWidth-1 do love.graphics.print(msgGameOver, gameOverMsgX+o, gameOverMsgY) end
     end
 

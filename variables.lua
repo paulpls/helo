@@ -95,7 +95,6 @@ blockHeight = 128
 blockMargin = 64
 blockX = windowWidth
 blockY = math.floor((windowHeight-(windowMarginY*2)/2) - math.floor(blockHeight/2))
-blockColor = {0.25, 1, 0.33}
 blockMoving = false
 blockSpeedX = 1
 blockSpeedY = 1
@@ -128,7 +127,11 @@ trailAnimationDelay = 0.25
 --
 --  Colors
 --
-colorDefault = {1, 1, 1, 1}
+colorDefault = {1, 1, 1}
+colorBackground = {0, 0, 0}
+colorText = {0, 1, 1}
+colorBlock = {0.25, 1, 0.33}
+colorGameOver = {1, 0, 0}
 colorRainbow = false
 colorRainbowResolution = 1023
 
