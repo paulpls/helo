@@ -147,6 +147,15 @@ fontBoldWidth = 2
 
 
 --
+--  Score display
+--
+scoreMargin = 8
+scoreOffset = math.floor(scoreMargin / 2)
+scoreDisplayMinLength = 8
+
+
+
+--
 --  Messages
 --
 msgGameOver = "GAME OVER"

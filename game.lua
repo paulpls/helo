@@ -26,13 +26,28 @@ end
 --
 --  Update score
 --
-function Game:updateScore(dt)
+function Game:updateScore (dt)
     if self.scoreElapsed >= self.scoreDelay then
         self.score = self.score + self.scoreMultiplier
         self.scoreElapsed = self.scoreElapsed - self.scoreDelay
     else
         self.scoreElapsed = self.scoreElapsed + dt
     end
+end
+
+
+
+--
+--  Display score with left zero padding
+--
+function Game:getScoreDisplay (pad, ch)
+    local str = tostring(game.score)
+    local ch = ch or "0"
+    local len = #tostring(self.score)
+    if len < pad then
+        for i=len, pad do str = ch..str end
+    end
+    return str
 end
 
 

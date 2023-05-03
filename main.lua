@@ -176,7 +176,6 @@ love.update = function (dt)
         player:move(1, 0, camera.speedX)
 
         --  Update camera, wall, block, and player boundaries
-        --  TODO debug methods to draw bounds, hitboxes, etc.
         camera:moveBounds(camera.speedX)
         player:moveBounds(camera.speedX)
 
@@ -269,13 +268,17 @@ love.draw = function ()
     --  Draw trails
     for _,t in ipairs(trails) do t:draw() end
 
-    --  TODO Draw score in top left corner
-    --local scoreX,scoreY = camera.bounds.x1 + 8, camera.bounds.y1 + 8
-    --local scoreW,scoreH = (#tostring(game.score) * fontWidth) + 8, fontHeight + 8
-    --love.graphics.setColor(0,0,0)
-    --love.graphics.rectangle("fill", scoreX, scoreY, scoreW, scoreH)
-    --love.graphics.setColor(colorDefault)
-    --love.graphics.print(tostring(game.score), scoreY + 4, scoreY + 4)
+    --  Draw score in top left corner
+    local scoreDisplay = game:getScoreDisplay(scoreDisplayMinLength)
+    local scoreX,scoreY = camera.bounds.x1 + scoreMargin, camera.bounds.y1 + scoreMargin
+    local scoreW = #scoreDisplay * (fontWidth + fontKerning)
+    local scoreH = fontHeight + 8
+    --  Draw the background
+    love.graphics.setColor(0,0,0)
+    love.graphics.rectangle("fill", scoreX, scoreY, scoreW, scoreH)
+    --  Draw the score display
+    love.graphics.setColor(colorDefault)
+    love.graphics.print(scoreDisplay, scoreX + scoreOffset, scoreY + scoreOffset)
 
     --  Draw the player over the rest of the objects
     love.graphics.setColor(Color.default)
