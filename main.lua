@@ -33,6 +33,7 @@ require "helicopter"
 require "camera"
 require "block"
 require "trail"
+require "message"
 
 
 --
@@ -107,8 +108,22 @@ love.load = function ()
     --  Blocks
     blocks = {}
 
+    --  Add initial walls if at game start
+    local startWallX = 0
+    local startWallY1 = 0
+    local startWallY2 = windowHeight - blockMargin
+    local startWallW = windowWidth + (2 * blockWidth)
+    local startWallH = blockMargin
+    table.insert(blocks, Block:new(startWallX, startWallY1, startWallW, startWallH))
+    table.insert(blocks, Block:new(startWallX, startWallY2, startWallW, startWallH))
+
     --  Trails
     trails = {}
+
+    --  Messages
+    messages = {}
+    local initMsg = Message:new("PRESS SPACEBAR OR CLICK MOUSE TO START")
+    table.insert(messages, initMsg)
 
 end
 
@@ -121,132 +136,133 @@ love.update = function (dt)
 
     local color, colorIndex
 
-    --  Add initial walls if at game start
+    --  Game is waiting to start
     if game.start then
-        local startWallX = 0
-        local startWallY1 = 0
-        local startWallY2 = windowHeight - blockMargin
-        local startWallW = windowWidth + (2 * blockWidth)
-        local startWallH = blockMargin
-        table.insert(blocks, Block:new(startWallX, startWallY1, startWallW, startWallH))
-        table.insert(blocks, Block:new(startWallX, startWallY2, startWallW, startWallH))
-    end
-
-    --  Do movement/updates if game is running
-    if game:isRunning() then
-
-        --  Move the player
-        local dy = 1        --  Velocity
-        local dl,df = 1, 1  --  Lift / fall accel
-        --  Lift / Throttle
         if love.mouse.isDown(1) or love.keyboard.isDown("space") then
-            player.falling = false
-            player.fallElapsedTime = 0
-            --  Evaluate lift acceleration
-            player.liftElapsedTime = player.liftElapsedTime + dt
-            if player.liftElapsedTime <= player.liftDelay then
-                dy = 1
-                dl = math.min(1, player.liftElapsedTime / player.liftDelay)
-            else
-                player.lifting = true
-                dy = 1
-                dl = math.min(3.0, player.liftElapsedTime / player.liftDelay)
-            end
-        --  Falling / No throttle
-        else
-            player.lifting = false
-            player.liftElapsedTime = 0
-            --  Evaluate fall acceleration
-            player.fallElapsedTime = player.fallElapsedTime + dt
-            if player.fallElapsedTime <= player.fallDelay then
-                dy = -1
-                df = math.min(1, player.fallElapsedTime / player.fallDelay)
-            else
-                player.falling = true
-                dy = -1
-                df = math.min(1.25, player.fallElapsedTime / player.fallDelay)
-            end
+            game.start = false
         end
+        
 
-        --  Move the player
-        player:move(0, dy, camera.speedX, player.liftSpeed * dl, player.fallSpeed * df)
-
-        --  Pan the camera and move the player
-        camera:pan(1)
-        player:move(1, 0, camera.speedX)
-
-        --  Update camera, wall, block, and player boundaries
-        camera:moveBounds(camera.speedX)
-        player:moveBounds(camera.speedX)
-
-        --  Crash the helicopter if collided with bounds
-        if player:detectCollisions() then player:crash() end
-
-        --  Crash the helicopter if collided with blocks
-        for _,b in ipairs(blocks) do
-            if player:detectCollisions(b) then player:crash() end
-        end
-
-        --  Update player score
-        game:updateScore(dt)
-
-        --  Delete off-screen blocks
-        for i,b in ipairs(blocks) do
-            if b:isOffscreen(camera.bounds) then
-                table.remove(blocks,i)
-            end
-        end
-
-        --  Spawn new blocks as necessary
-        if blockSpawnElapsed <= blockSpawnDelay then
-            blockSpawnElapsed = blockSpawnElapsed + dt
-        else
-            blockSpawnElapsed = 0
-            --  Rainbow color cycle
-            if Color.rainbow then
-                colorIndex = (game.score % #Color.rainbowCycle) + 1
-                color = Color.rainbowCycle[colorIndex]
-            end
-            --  Insert new blocks
-            local newWalls = Block:spawnWalls(camera.bounds.x2, camera.bounds.y1, color)
-            table.insert(blocks, newWalls[1])
-            table.insert(blocks, newWalls[2])
-        end
-
-        --  Delete off-screen trails
-        for i,t in ipairs(trails) do
-            if t:isOffscreen(camera.bounds.x1) then
-                table.remove(trails,i)
-            end
-        end
-
-        --  Spawn new trails as necessary
-        if trailSpawnElapsed <= trailSpawnDelay then
-            trailSpawnElapsed = trailSpawnElapsed + dt
-        else
-            trailSpawnElapsed = 0
-            --  Insert new trails
-            local newTrail = Trail:new(player.x, player.y + math.floor(player.frames.h / 2))
-            table.insert(trails, newTrail)
-        end
-
-        --  End the game and print score to stdout if player crashes
-        if player.crashed then
-            game.over = true
-            print("Your score: "..game.score)
-        end
-
-    --  If game is not running, handle pause or gameover events
+    --  Game is started
     else
-        --  TODO Add paused/gameover functionality
+
+        --  Do movement/updates if game is running
+        if game:isRunning() then
+    
+            --  Move the player
+            local dy = 1        --  Velocity
+            local dl,df = 1, 1  --  Lift / fall accel
+            --  Lift / Throttle
+            if love.mouse.isDown(1) or love.keyboard.isDown("space") then
+                player.falling = false
+                player.fallElapsedTime = 0
+                --  Evaluate lift acceleration
+                player.liftElapsedTime = player.liftElapsedTime + dt
+                if player.liftElapsedTime <= player.liftDelay then
+                    dy = 1
+                    dl = math.min(1, player.liftElapsedTime / player.liftDelay)
+                else
+                    player.lifting = true
+                    dy = 1
+                    dl = math.min(3.0, player.liftElapsedTime / player.liftDelay)
+                end
+            --  Falling / No throttle
+            else
+                player.lifting = false
+                player.liftElapsedTime = 0
+                --  Evaluate fall acceleration
+                player.fallElapsedTime = player.fallElapsedTime + dt
+                if player.fallElapsedTime <= player.fallDelay then
+                    dy = -1
+                    df = math.min(1, player.fallElapsedTime / player.fallDelay)
+                else
+                    player.falling = true
+                    dy = -1
+                    df = math.min(1.25, player.fallElapsedTime / player.fallDelay)
+                end
+            end
+    
+            --  Move the player
+            player:move(0, dy, camera.speedX, player.liftSpeed * dl, player.fallSpeed * df)
+    
+            --  Pan the camera and move the player
+            camera:pan(1)
+            player:move(1, 0, camera.speedX)
+    
+            --  Update camera, wall, block, and player boundaries
+            camera:moveBounds(camera.speedX)
+            player:moveBounds(camera.speedX)
+    
+            --  Crash the helicopter if collided with bounds
+            if player:detectCollisions() then player:crash() end
+    
+            --  Crash the helicopter if collided with blocks
+            for _,b in ipairs(blocks) do
+                if player:detectCollisions(b) then player:crash() end
+            end
+    
+            --  Update player score
+            game:updateScore(dt)
+    
+            --  Delete off-screen blocks
+            for i,b in ipairs(blocks) do
+                if b:isOffscreen(camera.bounds) then
+                    table.remove(blocks,i)
+                end
+            end
+    
+            --  Spawn new blocks as necessary
+            if blockSpawnElapsed <= blockSpawnDelay then
+                blockSpawnElapsed = blockSpawnElapsed + dt
+            else
+                blockSpawnElapsed = 0
+                --  Rainbow color cycle
+                if Color.rainbow then
+                    colorIndex = (game.score % #Color.rainbowCycle) + 1
+                    color = Color.rainbowCycle[colorIndex]
+                end
+                --  Insert new blocks
+                local newWalls = Block:spawnWalls(camera.bounds.x2, camera.bounds.y1, color)
+                table.insert(blocks, newWalls[1])
+                table.insert(blocks, newWalls[2])
+            end
+    
+            --  Delete off-screen trails
+            for i,t in ipairs(trails) do
+                if t:isOffscreen(camera.bounds.x1) then
+                    table.remove(trails,i)
+                end
+            end
+    
+            --  Spawn new trails as necessary
+            if trailSpawnElapsed <= trailSpawnDelay then
+                trailSpawnElapsed = trailSpawnElapsed + dt
+            else
+                trailSpawnElapsed = 0
+                --  Insert new trails
+                local newTrail = Trail:new(player.x, player.y + math.floor(player.frames.h / 2))
+                table.insert(trails, newTrail)
+            end
+    
+            --  End the game and print score to stdout if player crashes
+            if player.crashed then
+                game.over = true
+                print("Your score: "..game.score)
+            end
+    
+        --  If game is not running, handle pause or gameover events
+        else
+            --  TODO Add paused/gameover functionality
+        end
+    
+        --  Unset game start flag if set
+        if game.start then game.start = false end
+    
+        --  Update trails
+        for _,t in ipairs(trails) do t:update(dt) end
+
     end
-
-    --  Unset game start flag if set
-    if game.start then game.start = false end
-
-    --  Update trails
-    for _,t in ipairs(trails) do t:update(dt) end
-
+    
     --  Update the player parameters
     player:update(dt)
 
@@ -279,6 +295,9 @@ love.draw = function ()
     --  Draw the score display
     love.graphics.setColor(Color.text)
     for o=0, fontBoldWidth-1 do love.graphics.print(scoreDisplay, scoreX + scoreOffset, scoreY + scoreOffset) end
+
+    --  Draw messages
+    for _,m in ipairs(messages) do m:draw() end
 
     --  Draw the player over the rest of the objects
     love.graphics.setColor(Color.default)
