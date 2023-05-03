@@ -7,8 +7,11 @@ Message = class:new()
 
 
 --  Init
-function Message:init (text, x, y)
+function Message:init (text, bold, x, y)
+    --  Message text
     self.text = text
+    --  Bold text
+    self.bold = bold or false
     --  Calculate message width and height
     local w = #text * (fontWidth + fontKerning)
     local h = fontHeight
@@ -25,7 +28,11 @@ end
 
 function Message:draw ()
     love.graphics.setColor(Color.text)
-    love.graphics.print(self.text, self.x, self.y)
+    if self.bold then
+        for o=0, fontBoldWidth-1 do
+            love.graphics.print(self.text, self.x + o, self.y)
+        end
+    end
 end
 
 

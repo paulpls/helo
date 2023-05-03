@@ -122,7 +122,7 @@ love.load = function ()
 
     --  Messages
     messages = {}
-    local initMsg = Message:new("PRESS SPACEBAR OR CLICK MOUSE TO START")
+    local initMsg = Message:new("PRESS SPACEBAR OR CLICK MOUSE TO START", true)
     table.insert(messages, initMsg)
 
 end
