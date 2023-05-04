@@ -104,11 +104,18 @@ blockBounds = {
                   x2 = windowWidth - windowMarginX,
                   y2 = windowHeight - windowMarginY
               }
-blockSpawnDelay = 0.15
+blockSpawnDelay = 2.5
 blockGapMinSize = 96
 blockRandomSpawnGapMin = 512
 blockGapMaxSize = blockBounds.y2 - blockBounds.y1
 blockChangeGap = 30
+
+
+
+--
+--  Walls
+--
+wallSpawnDelay = 0.15
 
 
 

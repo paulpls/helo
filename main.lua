@@ -62,6 +62,7 @@ end
 --  Locals
 --
 local collision = false
+local wallSpawnElapsed = 0
 local blockSpawnElapsed = 0
 local trailSpawnElapsed = 0
 
@@ -210,12 +211,28 @@ love.update = function (dt)
                     table.remove(blocks,i)
                 end
             end
-    
-            --  Spawn new blocks as necessary
+
+
+            --  Spawn random blocks
             if blockSpawnElapsed <= blockSpawnDelay then
                 blockSpawnElapsed = blockSpawnElapsed + dt
             else
                 blockSpawnElapsed = 0
+                --  Rainbow color cycle
+                if Color.rainbow then
+                    colorIndex = (game.score % #Color.rainbowCycle) + 1
+                    color = Color.rainbowCycle[colorIndex]
+                end
+                --  Insert new blocks
+                local newBlock = Block:spawnBlock(color)
+                table.insert(blocks, newBlock)
+            end
+    
+            --  Spawn new walls as necessary
+            if wallSpawnElapsed <= wallSpawnDelay then
+                wallSpawnElapsed = wallSpawnElapsed + dt
+            else
+                wallSpawnElapsed = 0
                 --  Rainbow color cycle
                 if Color.rainbow then
                     colorIndex = (game.score % #Color.rainbowCycle) + 1

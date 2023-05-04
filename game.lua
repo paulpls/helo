@@ -13,7 +13,7 @@ function Game:init ()
     --  Scoring
     self.score = 0
     self.scoreMultiplier = 1
-    self.scoreDelay = blockSpawnDelay
+    self.scoreDelay = wallSpawnDelay
     self.scoreElapsed = 0
     --  Game event flags
     self.start = true

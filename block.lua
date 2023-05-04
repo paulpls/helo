@@ -143,6 +143,26 @@ end
 
 
 --
+--  Spawn a random block
+--
+--  NOTE Updates are performed when calling updateWalls()
+--
+function Block:spawnBlock (color, spawnX, spawnY)
+
+    local c = color or self.color
+    local x = spawnX or camera.bounds.x2
+    local w = blockWidth
+    local h = blockHeight
+    local y = spawnY or Block.spawnpoint - math.floor(h / 2)
+
+    --  Return new block instances
+    return Block:new(x, y, w, h, c)
+
+end
+
+
+
+--
 --  Return new walls and update spawning parameters
 --
 function Block:spawnWalls (spawnX, spawnY, color)
@@ -176,7 +196,7 @@ end
 --
 --  Update walls spawnpoint
 --
---  TODO Make the top and bottom walls change independently of each other
+--  TODO Make the top and bottom walls change independently of each other?
 --
 function Block.updateWalls (bounds)
 
