@@ -115,8 +115,10 @@ love.load = function ()
     local startWallY2 = windowHeight - blockMargin
     local startWallW = windowWidth + (2 * blockWidth)
     local startWallH = blockMargin
-    table.insert(blocks, Block:new(startWallX, startWallY1, startWallW, startWallH))
-    table.insert(blocks, Block:new(startWallX, startWallY2, startWallW, startWallH))
+    local color = colorBlock
+    if Color.rainbow then color = Color.rainbowCycle[1] end
+    table.insert(blocks, Block:new(startWallX, startWallY1, startWallW, startWallH, color))
+    table.insert(blocks, Block:new(startWallX, startWallY2, startWallW, startWallH, color))
 
     --  Trails
     trails = {}
