@@ -45,7 +45,7 @@ function Game:getScoreDisplay (pad, ch)
     local ch = ch or "0"
     local len = #tostring(self.score)
     if len < pad then
-        for i=len, pad do str = ch..str end
+        for i=len, pad-1 do str = ch..str end
     end
     return str
 end

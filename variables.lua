@@ -151,7 +151,7 @@ fontPath = "assets/fonts/pixel.png"
 fontGlyphs = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 fontWidth = 11
 fontHeight = 16
-fontKerning = 3
+fontKerning = 2
 fontBoldWidth = 2
 
 
@@ -161,7 +161,7 @@ fontBoldWidth = 2
 --
 scoreMargin = 8
 scoreOffset = math.floor(scoreMargin / 2)
-scoreDisplayMinLength = 8
+scoreDisplayMinLength = 4
 
 
 
