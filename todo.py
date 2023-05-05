@@ -26,7 +26,7 @@ commitMsg = "\"Updated TODO (commit performed automatically by \\`todo.py\\`)\""
 if __name__ == "__main__":
 
     out = [outhead, note]
-    success = False
+    success = True
 
     # Get list of matches
     grep = subprocess.run(cmd, shell=True, capture_output=True)
@@ -61,7 +61,7 @@ if __name__ == "__main__":
         # Remove the file
         if diff:
             rm = subprocess.run(f"rm {outpath}", shell=True, capture_output=True)
-            success = not rm.returncode
+            success = rm.returncode == 0
         else:
             print("Files are the same; no changes to write.")
 
