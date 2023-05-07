@@ -81,6 +81,8 @@ love.load = function ()
 
     -- Reset game state
     game.over = false
+    game.start = true
+    game.score = 0
 
     --  Use nearest-neighbor interpolation for scaling drawable objects
     love.graphics.setDefaultFilter("nearest", "nearest")
