@@ -20,6 +20,7 @@ All assets, graphics, audio, etc. were created by [paulpls](http://www.github.co
 |-------------------:|:-----------------------------------------:|
 | left mouse button  | Move the helicopter up                    |
 | spacebar           | "                                         |
+| return             | Restart the game                          |
 
 
 

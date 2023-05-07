@@ -69,16 +69,21 @@ local firstRun = true
 
 
 
+--  Game state manager
+game = Game:new() 
+
+
+
 --
 --  Load callbacks
 --
 love.load = function ()
 
+    -- Reset game state
+    game.over = false
+
     --  Use nearest-neighbor interpolation for scaling drawable objects
     love.graphics.setDefaultFilter("nearest", "nearest")
-
-    --  Game state manager
-    game = Game:new() 
 
     --  Font
     font = Font:new()
@@ -126,9 +131,14 @@ love.load = function ()
 
     --  Messages
     messages = {}
-    local initMsg = Message:new("PRESS SPACEBAR OR CLICK MOUSE TO START", true)
     --  Draw init message on first run
-    if firstRun then table.insert(messages, initMsg) end
+    local initMsg = nil
+    if firstRun then
+        initMsg = Message:new("PRESS SPACEBAR OR CLICK MOUSE TO START", true)
+    else
+        initMsg = Message:new("HIGH SCORE: "..game:getHighScoreDisplay(scoreDisplayMinLength), true)
+    end
+    table.insert(messages, initMsg)
 
 end
 
@@ -269,12 +279,8 @@ love.update = function (dt)
             --  End the game and print score to stdout if player crashes
             if player.crashed then
                 game.over = true
-                print("Your score: "..game.score)
             end
     
-        --  If game is not running, handle pause or gameover events
-        else
-            --  TODO Add paused/gameover functionality
         end
     
         --  Unset game start flag if set
@@ -369,10 +375,9 @@ love.draw = function ()
         for o=0, fontBoldWidth-1 do love.graphics.print(msgGameOver, gameOverMsgX+o, gameOverMsgY) end
     end
 
-    --  Game over
+    --  Game over, <CR> restarts
     if game.over then
-        if love.mouse.isDown(1) or love.keyboard.isDown("space") then
-            print("reset")
+        if love.keyboard.isDown("return") then
             love.load()
         end
     end
