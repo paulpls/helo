@@ -139,7 +139,7 @@ colorBackground = {0, 0, 0}
 colorText = {0, 1, 1}
 colorBlock = {0.25, 1, 0.33}
 colorGameOver = {1, 0, 0}
-colorRainbow = false
+colorRainbow = true
 colorRainbowResolution = 1023
 
 

@@ -65,6 +65,7 @@ local collision = false
 local wallSpawnElapsed = 0
 local blockSpawnElapsed = 0
 local trailSpawnElapsed = 0
+local firstRun = true
 
 
 
@@ -126,7 +127,8 @@ love.load = function ()
     --  Messages
     messages = {}
     local initMsg = Message:new("PRESS SPACEBAR OR CLICK MOUSE TO START", true)
-    table.insert(messages, initMsg)
+    --  Draw init message on first run
+    if firstRun then table.insert(messages, initMsg) end
 
 end
 
@@ -142,6 +144,7 @@ love.update = function (dt)
     --  Game is waiting to start
     if game.start then
         if love.mouse.isDown(1) or love.keyboard.isDown("space") then
+            firstRun = false
             game.start = false
         end
         
@@ -364,6 +367,14 @@ love.draw = function ()
         --  Repeatedly draw the message to achieve a bold effect
         love.graphics.setColor(Color.gameOver)
         for o=0, fontBoldWidth-1 do love.graphics.print(msgGameOver, gameOverMsgX+o, gameOverMsgY) end
+    end
+
+    --  Game over
+    if game.over then
+        if love.mouse.isDown(1) or love.keyboard.isDown("space") then
+            print("reset")
+            love.load()
+        end
     end
 
 end
