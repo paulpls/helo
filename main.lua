@@ -118,6 +118,7 @@ love.load = function ()
     blocks = {}
 
     --  Add initial walls if at game start
+    --  FIXME Y spawnpoint remains constant from game to game
     local startWallX = 0
     local startWallY1 = 0
     local startWallY2 = windowHeight - blockMargin
