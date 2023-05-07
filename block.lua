@@ -205,7 +205,7 @@ function Block.updateWalls (bounds)
     --local g,gmin,gmax = Block.gapSize, Block.gapMinSize, Block.gapMaxSize
 
     --  Randomize the y value change
-    local dyList = {0, 1, 1, 1, 1, 1, 2, 3, 5, 8, 13, 21}
+    local dyList = {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5}
 
     --  Get a random value from the table above
     local dy = dyList[rng(1, #dyList)]
