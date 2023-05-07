@@ -170,7 +170,7 @@ love.update = function (dt)
                 else
                     player.lifting = true
                     dy = 1
-                    dl = math.min(3.0, player.liftElapsedTime / player.liftDelay)
+                    --dl = math.min(3.0, player.liftElapsedTime / player.liftDelay)
                 end
             --  Falling / No throttle
             else
