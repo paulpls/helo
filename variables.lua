@@ -123,11 +123,11 @@ wallSpawnDelay = 0.15
 --  Trail
 --
 trailImgPath = "assets/img/trail.png"
-trailSpawnDelay = 0.08
+trailSpawnDelay = 0.075
 trailFrames = 8
 trailSpriteWidth = 16
 trailSpriteHeight = 16
-trailAnimationDelay = 0.25
+trailAnimationDelay = 0.35
 
 
 
