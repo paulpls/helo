@@ -159,7 +159,9 @@ fontBoldWidth = 2
 --
 --  Score display
 --
-scoreMargin = 8
+scoreX = 8
+scoreY = 8
+scoreMargin = 16
 scoreOffset = math.floor(scoreMargin / 2)
 scoreDisplayMinLength = 4
 

@@ -317,9 +317,9 @@ love.draw = function ()
 
     --  Draw score in top left corner
     local scoreDisplay = game:getScoreDisplay(scoreDisplayMinLength)
-    local scoreX,scoreY = camera.bounds.x1 + scoreMargin, camera.bounds.y1 + scoreMargin
+    local scoreX,scoreY = camera.bounds.x1 + scoreX, camera.bounds.y1 + scoreY
     local scoreW = #scoreDisplay * (fontWidth + fontKerning) + scoreMargin
-    local scoreH = fontHeight + 8
+    local scoreH = fontHeight + scoreMargin
     --  Draw the background
     love.graphics.setColor(Color.background)
     love.graphics.rectangle("fill", scoreX, scoreY, scoreW, scoreH)
