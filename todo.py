@@ -13,7 +13,7 @@ from sys import stdout
 # Setup
 inpath = "*.lua"
 patterns = ["TODO", "FIXME"]
-cmd = "grep -n {} {}"
+cmd = "grep -rn {} --include \"{}\""
 outpath = "TODO.md"
 outhead = "# TODO\n"
 outfmt = "- [ ] {} [{}]({}#L{}):{}\n" # Not a forkbomb I promise
