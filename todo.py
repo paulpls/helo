@@ -77,15 +77,15 @@ if __name__ == "__main__":
         # Grep the output of git status for any added changes
         cmd = "git status | grep -q 'Changes to be committed:'"
         # If the quiet grep returns 0 we're no good
-        clean = not subprocess.run(cmd, shell=True).returncode
-        # If no changes have been added, auto-commit the output file
+        clean = subprocess.run(cmd, shell=True).returncode != 0
         if clean:
+            # If no changes have been added, auto-commit the output file
             add = f"git add {outpath}"
             commit = f"git commit -m {commitMsg}"
             subprocess.run(add, shell=True)
             subprocess.run(commit, shell=True)
-        # Skip auto-commit if there are previous changes to commit
         else:
+            # Skip auto-commit if there are previous changes to commit
             print(f"Git working tree is not clean!\nSkipping auto-commit for {outpath}")
 
 
