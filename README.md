@@ -1,7 +1,7 @@
 ![Screenshot of gameplay](assets/img/screenshot.png)
   
 # ![HELO icon](assets/img/icon_32.png) HELO
-Version: alpha
+Version: alpha  
 Author: [paulpls](https://github.com/paulpls)  
 License: [GPL 3.0](LICENSE.md)  
   
