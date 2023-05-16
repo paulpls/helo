@@ -1,12 +1,14 @@
-# ![HELO icon](assets/img/icon_32.png) HELO
 ![Screenshot of gameplay](assets/img/screenshot.png)
+  
+# ![HELO icon](assets/img/icon_32.png) HELO
+Version: alpha
+Author: [paulpls](https://github.com/paulpls)  
+License: [GPL 3.0](LICENSE.md)  
   
 ## About
 HELO is a helicopter game clone created with the LÖVE 2D game engine. In trying to get a feel for the basic LÖVE workflow, I decided to tackle building this project from the ground up. Development for this game is still a work-in-progress.  
 
 All assets, graphics, audio, etc. were created by [paulpls](http://www.github.com/paulpls) unless otherwise stated.
-  
-**Version:** `alpha`  
 
 ## How to Do the Thing
 - Install [LÖVE](https://www.love2d.org)
@@ -16,11 +18,10 @@ All assets, graphics, audio, etc. were created by [paulpls](http://www.github.co
 
 
 ## Controls
-| Key                | Description                               |
-|-------------------:|:-----------------------------------------:|
-| left mouse button  | Move the helicopter up                    |
-| spacebar           | "                                         |
-| return             | Restart the game                          |
+| Input                          | Description            |
+|:------------------------------:|:-----------------------|
+| primary mouse button, spacebar | Move the helicopter up |
+| return                         | Restart the game       |
 
 
 
@@ -29,7 +30,7 @@ See [TODO](TODO.md)
 
 
 
-## License
+## License Information
   
     Copyright (C) 2023 Paul Clayberg
     
